@@ -22,8 +22,8 @@ export default function DealerPage() {
       <div className="v-page-header">
         <h1>Find a Dealer</h1>
         <p>
-          Our dealer network listing is being finalized. The layout and search below are ready to populate with real
-          dealer details — in the meantime, contact us directly and our team can point you to your nearest source.
+          Our dealer directory is being expanded. Contact us directly and the King Paints Nepal team can help you
+          find the nearest source for your project.
         </p>
       </div>
 
@@ -47,7 +47,7 @@ export default function DealerPage() {
           ))}
         </div>
       ) : (
-        <div className="v-empty-state">No dealers match that search.</div>
+        <div className="v-empty-state">No dealer listings match that search. Please contact us for local availability.</div>
       )}
     </div>
   );

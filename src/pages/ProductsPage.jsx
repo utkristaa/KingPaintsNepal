@@ -17,9 +17,8 @@ export default function ProductsPage({ viewProduct }) {
         <div className="v-page-header">
           <h1>Our Products</h1>
           <p>
-            King Paints Nepal manufactures around 40 products across the categories below. Final product names and
-            details are being finalized — this page reflects the catalogue structure and will be updated as products
-            are confirmed.
+            Browse paint categories from King Paints Nepal. Contact our team for current product specifications,
+            sizes, availability, and project guidance.
           </p>
         </div>
         <div className="v-filter-row">

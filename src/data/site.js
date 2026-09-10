@@ -1,8 +1,7 @@
 // ============================================================
 // CENTRAL SITE CONFIGURATION
 // Edit this file to update company details site-wide.
-// Everything in this file is REAL information provided by the client,
-// except items explicitly marked "TO BE ADDED", which are placeholders.
+// Keep company details centralized so contact and structured data stay aligned.
 // ============================================================
 
 export const SITE = {
@@ -18,13 +17,13 @@ export const SITE = {
 
   phones: ["985-1182340", "9851033919"],
 
-  email: "[EMAIL TO BE ADDED]",
-  website: "[WEBSITE TO BE ADDED]",
+  email: "",
+  website: "https://kingpaintsnepal.com",
 
   social: {
-    facebook: "[FACEBOOK TO BE ADDED]",
-    instagram: "[INSTAGRAM TO BE ADDED]",
-    linkedin: "[LINKEDIN TO BE ADDED]",
+    facebook: "",
+    instagram: "",
+    linkedin: "",
   },
 };
 

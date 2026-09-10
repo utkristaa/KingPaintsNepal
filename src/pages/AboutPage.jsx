@@ -1,11 +1,10 @@
 import React from "react";
 import { CheckCircle2, Factory, Flame, ShieldCheck, Leaf } from "lucide-react";
-import { TIMELINE, FOUNDERS } from "../data/timeline.js";
+import { TIMELINE } from "../data/timeline.js";
 import { MACHINERY_CATEGORIES } from "../data/machinery.js";
-import { CERTIFICATIONS } from "../data/certifications.js";
-import { SITE } from "../data/site.js";
 import Button from "../components/Button.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import SafeImage from "../components/SafeImage.jsx";
 
 export default function AboutPage({ go }) {
   return (
@@ -16,9 +15,8 @@ export default function AboutPage({ go }) {
           <div className="v-section-label">Who We Are</div>
           <h1 style={{ fontSize: 46, marginBottom: 18 }}>A paint manufacturer based in Kathmandu.</h1>
           <p style={{ fontSize: 17, color: "var(--charcoal-soft)", lineHeight: 1.7 }}>
-            King Paints Nepal manufactures 100% of the paint it produces at our facility in Tarakeshwar Municipality,
-            Ward 5, Kathmandu. We formulate, process, and finish every product ourselves — we do not resell
-            paint manufactured elsewhere.
+            King Paints Nepal develops a locally manufactured paint range from its facility in Tarakeshwar Municipality,
+            Ward 5, Kathmandu. Contact the team for current product, project, and availability information.
           </p>
         </div>
       </div>
@@ -29,7 +27,7 @@ export default function AboutPage({ go }) {
           <SectionHeading
             label="Our Story"
             title="How King Paints Nepal was built."
-            description="The full story behind the company is still being written up in detail. Below is the timeline structure we'll fill in as milestones are confirmed."
+            description="King Paints Nepal is building a locally manufactured paint range from its Kathmandu facility."
           />
           <div className="v-timeline">
             {TIMELINE.map((item, i) => (
@@ -52,17 +50,7 @@ export default function AboutPage({ go }) {
       {/* Founders */}
       <section className="v-section-tight" style={{ background: "var(--ivory-soft)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
         <div className="v-shell">
-          <SectionHeading label="Leadership" title="Introducing the founders." description="Founder details will be added here." />
-          <div className="v-value-grid">
-            {FOUNDERS.map((f, i) => (
-              <div className="v-founder-card" key={i}>
-                <div className="v-founder-avatar">{f.name.startsWith("[") ? "?" : f.name.charAt(0)}</div>
-                <h3>{f.name}</h3>
-                <div className="v-founder-role">{f.role}</div>
-                <p>{f.bio}</p>
-              </div>
-            ))}
-          </div>
+          <SectionHeading label="Leadership" title="People behind the paint." description="Meet the team through the contact channel for current company and project enquiries." />
         </div>
       </section>
 
@@ -71,19 +59,19 @@ export default function AboutPage({ go }) {
         <div className="v-shell">
           <div className="v-split">
             <div className="v-split-img">
-              <img src="https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=1000&q=80" alt="Interior of a paint manufacturing facility" />
+              <SafeImage src="https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=1000&q=80" alt="Interior of a paint manufacturing facility" />
             </div>
             <div>
               <div className="v-section-label">Our Manufacturing Facility</div>
-              <h2 style={{ fontSize: 34, marginBottom: 16 }}>A large-scale facility in Tarakeshwar Municipality.</h2>
+              <h2 style={{ fontSize: 34, marginBottom: 16 }}>A Kathmandu facility for local paint production.</h2>
               <p style={{ color: "var(--charcoal-soft)", fontSize: 16, lineHeight: 1.7 }}>
-                Our factory in Tarakeshwar Municipality, Ward 5, Kathmandu, is a large manufacturing facility with
-                high production capacity, built to formulate, process, and package our full product range in-house.
+                Our facility in Tarakeshwar Municipality, Ward 5, Kathmandu, supports paint formulation, processing,
+                and packaging for the King Paints Nepal range.
               </p>
               <div className="v-checklist">
                 <div className="v-check-item"><CheckCircle2 size={18} /> Formulation, processing, and packaging under one roof</div>
                 <div className="v-check-item"><CheckCircle2 size={18} /> Located in Kathmandu, Nepal</div>
-                <div className="v-check-item"><CheckCircle2 size={18} /> Built for high production capacity</div>
+                <div className="v-check-item"><CheckCircle2 size={18} /> Supporting local paint production</div>
               </div>
             </div>
           </div>
@@ -96,7 +84,7 @@ export default function AboutPage({ go }) {
           <SectionHeading
             label="Manufacturing Capabilities"
             title="The categories of equipment behind our process."
-            description="These are provisional categories describing the kind of equipment used in paint manufacturing generally. The confirmed King Paints Nepal equipment list will replace this section."
+            description="Our facility supports formulation, processing, quality control, and packaging under one roof."
           />
           <div className="v-machinery-grid">
             {MACHINERY_CATEGORIES.map((m, i) => (
@@ -120,17 +108,17 @@ export default function AboutPage({ go }) {
             <div className="v-feature">
               <div className="v-feature-icon"><Factory size={22} /></div>
               <h3>Resin Synthesis</h3>
-              <p>We synthesize our own polymer resins in-house instead of mixing pre-made ingredients, which gives us direct control over batch consistency, tensile strength, and washability.</p>
+              <p>Our process is designed around local formulation and production, with product and availability details confirmed directly with the team.</p>
             </div>
             <div className="v-feature">
               <div className="v-feature-icon"><Flame size={22} /></div>
               <h3>Thermal Cross-Linking</h3>
-              <p>Coatings are processed at temperatures between 130°C and 180°C, cross-linking the molecules into a dense, non-porous protective barrier designed for scratch resistance and weather protection.</p>
+              <p>We select and discuss paint solutions according to the surface, environment, and finish required by each project.</p>
             </div>
             <div className="v-feature">
               <div className="v-feature-icon"><ShieldCheck size={22} /></div>
               <h3>Climate-Customized Batches</h3>
-              <p>Each batch is customized for its destination climate and fortified with Teflon, graphene, and polyurethane, supporting stain resistance, UV protection, and a smooth, mark-resistant finish.</p>
+              <p>Contact our team for current information about available products, finishes, and recommended applications.</p>
             </div>
           </div>
         </div>
@@ -150,7 +138,7 @@ export default function AboutPage({ go }) {
               </p>
             </div>
             <div className="v-split-img" style={{ height: 320 }}>
-              <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80" alt="Paint tins being checked for quality" />
+              <SafeImage src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80" alt="Paint tins being checked for quality" />
             </div>
           </div>
         </div>
@@ -164,7 +152,7 @@ export default function AboutPage({ go }) {
               <div className="v-feature-icon" style={{ marginBottom: 0, flexShrink: 0 }}><Leaf size={22} /></div>
               <div>
                 <h3>Environmental Responsibility</h3>
-                <p>We take a responsible approach to how our facility operates. [Details on our environmental practices, waste handling, and any related certifications to be added.]</p>
+                <p>We consider responsible operation, careful material handling, and efficient manufacturing part of the work required to make dependable paint locally.</p>
               </div>
             </div>
           </div>
@@ -174,12 +162,7 @@ export default function AboutPage({ go }) {
       {/* Certifications */}
       <section className="v-section-tight" style={{ background: "var(--ivory-soft)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
         <div className="v-shell">
-          <SectionHeading label="Certifications & Approvals" title="Certified to manufacture." description="King Paints Nepal holds the certifications and approvals required to operate and manufacture. The exact list will be published here." />
-          <div className="v-feature-tags" style={{ marginBottom: 0 }}>
-            {CERTIFICATIONS.map((c, i) => (
-              <span className="v-feature-tag v-cert-chip" key={i}>{c}</span>
-            ))}
-          </div>
+          <SectionHeading label="Certifications & Approvals" title="Manufacturing with care." description="Contact the King Paints Nepal team for current documentation and approvals relevant to your project." />
         </div>
       </section>
 
@@ -197,7 +180,7 @@ export default function AboutPage({ go }) {
               </p>
             </div>
             <div className="v-split-img">
-              <img src="https://images.unsplash.com/photo-1523419409543-a5e549c1faa8?auto=format&fit=crop&w=1000&q=80" alt="Exterior of a manufacturing building" />
+              <SafeImage src="https://images.unsplash.com/photo-1523419409543-a5e549c1faa8?auto=format&fit=crop&w=1000&q=80" alt="Exterior of a manufacturing building" />
             </div>
           </div>
         </div>
@@ -207,8 +190,8 @@ export default function AboutPage({ go }) {
       <section className="v-shell">
         <div className="v-stats" style={{ marginBottom: 40 }}>
           <div className="v-stats-grid v-stats-grid-3">
-            <div><div className="v-stat-num">100%</div><div className="v-stat-label">In-House Manufacturing</div></div>
-            <div><div className="v-stat-num">5+</div><div className="v-stat-label">Years of Manufacturing</div></div>
+            <div><div className="v-stat-num">Local</div><div className="v-stat-label">Kathmandu production</div></div>
+            <div><div className="v-stat-num">Nepal</div><div className="v-stat-label">Built for local projects</div></div>
             <div><div className="v-stat-num">Kathmandu</div><div className="v-stat-label">Facility Location, Nepal</div></div>
           </div>
         </div>

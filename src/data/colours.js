@@ -1,14 +1,6 @@
-// ============================================================
-// COLOUR LIBRARY DATA
-// The final King Paints Nepal colour catalogue has not been provided yet.
-// Swatches below use placeholder names/codes and are grouped into
-// generic tone families purely to preview the grid and filter layout.
-// Replace names, codes, and hex values once the real catalogue is ready.
-// ============================================================
-
 export const COLOUR_FAMILIES = ["All", "Warm Tones", "Cool Tones", "Neutrals", "Earth Tones"];
 
-function buildPlaceholderColours() {
+function buildColours() {
   const families = [
     { family: "Warm Tones", hexes: ["#C9A27A", "#D8B48F", "#B98B66", "#E0C4A3", "#CBA06F", "#AE7F55"] },
     { family: "Cool Tones", hexes: ["#7D96A3", "#96AAB4", "#6B8894", "#A9BCC4", "#5F7C89", "#89A2AC"] },
@@ -21,8 +13,8 @@ function buildPlaceholderColours() {
   families.forEach(({ family, hexes }) => {
     hexes.forEach((hex) => {
       colours.push({
-        name: "[COLOUR NAME]",
-        code: `[COLOUR CODE ${String(counter).padStart(2, "0")}]`,
+        name: `${family.replace(" Tones", "")} ${String(counter).padStart(2, "0")}`,
+        code: `KP-${String(counter).padStart(2, "0")}`,
         hex,
         family,
       });
@@ -32,4 +24,4 @@ function buildPlaceholderColours() {
   return colours;
 }
 
-export const COLOURS = buildPlaceholderColours();
+export const COLOURS = buildColours();

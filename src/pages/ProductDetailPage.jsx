@@ -5,6 +5,7 @@ import Button from "../components/Button.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import ProductCard from "../components/ProductCard.jsx";
+import SafeImage from "../components/SafeImage.jsx";
 
 export default function ProductDetailPage({ product, go, viewProduct }) {
   if (!product) return null;
@@ -12,12 +13,12 @@ export default function ProductDetailPage({ product, go, viewProduct }) {
 
   return (
     <div className="v-shell" style={{ padding: "48px 0 96px" }}>
-      <a href="#" className="v-back-link" onClick={(e) => { e.preventDefault(); go("products"); }}>
+      <a href="/products" className="v-back-link" onClick={(e) => { e.preventDefault(); go("products"); }}>
         <ChevronLeft size={16} /> Back to Products
       </a>
       <div className="v-detail-grid">
         <div className="v-detail-img">
-          <img src={product.image} alt={product.name} />
+          <SafeImage src={product.image} alt={product.name} />
         </div>
         <div>
           <div className="v-detail-cat">{product.category}</div>

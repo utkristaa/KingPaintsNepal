@@ -9,14 +9,14 @@ export default function Navbar({ page, go, menuOpen, setMenuOpen }) {
     <header className="v-nav-wrap">
       <div className="v-shell">
         <nav className="v-nav">
-          <a href="#" onClick={(e) => { e.preventDefault(); go("home"); }} className="v-logo">
+          <a href="/" onClick={(e) => { e.preventDefault(); go("home"); }} className="v-logo">
             KING PAINTS<span>.</span>
           </a>
           <div className="v-nav-links">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.id}
-                href="#"
+                href={item.id === "home" ? "/" : `/${item.id}`}
                 className={`v-nav-link ${page === item.id || (page === "product-detail" && item.id === "products") ? "active" : ""}`}
                 onClick={(e) => { e.preventDefault(); go(item.id); }}
               >
@@ -48,7 +48,7 @@ export default function Navbar({ page, go, menuOpen, setMenuOpen }) {
           {NAV_ITEMS.map((item) => (
             <a
               key={item.id}
-              href="#"
+              href={item.id === "home" ? "/" : `/${item.id}`}
               className="v-mobile-link"
               onClick={(e) => { e.preventDefault(); go(item.id); setMenuOpen(false); }}
             >

@@ -23,8 +23,8 @@ export default function ColourLibraryPage() {
       <div className="v-page-header">
         <h1>Colour Library</h1>
         <p>
-          Our final colour catalogue has not been published yet. The grid below previews the layout with placeholder
-          swatches, names, and codes — it will be replaced with the real King Paints Nepal colour range.
+          Explore a curated set of colour families for planning your next project. Contact us to confirm availability
+          and finish options before ordering.
         </p>
       </div>
 

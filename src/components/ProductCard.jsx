@@ -1,10 +1,18 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import SafeImage from "./SafeImage.jsx";
 
 export default function ProductCard({ product, onView }) {
   return (
-    <div className="v-card">
+    <motion.div
+      className="v-card"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -6 }}
+    >
       <div className="v-card-img">
         <SafeImage src={product.image} alt={product.name} loading="lazy" />
       </div>
@@ -18,6 +26,6 @@ export default function ProductCard({ product, onView }) {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

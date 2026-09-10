@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { PRODUCTS } from "./data/products.js";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -98,9 +99,16 @@ export default function App() {
 
       <Footer go={go} />
 
-      <div className="v-whatsapp-float">
+      <motion.div
+        className="v-whatsapp-float"
+        initial={{ opacity: 0, scale: 0.8, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
         <WhatsAppButton label="WhatsApp Us" />
-      </div>
+      </motion.div>
     </div>
   );
 }

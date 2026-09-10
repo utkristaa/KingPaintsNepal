@@ -50,6 +50,7 @@ export default function ProductCard({ product, onView }) {
       <div className="v-card-body">
         <div>
           <span
+            className="v-card-cat-badge"
             style={{
               display: "inline-block",
               fontSize: 11.5,

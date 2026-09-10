@@ -134,203 +134,84 @@ export default function AboutPage({ go }) {
       </div>
 
       {/* Leadership & Founders Section — High-End Executive Presentation */}
-      <section
-        style={{
-          background: "linear-gradient(180deg, #142821 0%, #0F201A 100%)",
-          padding: "80px 0",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
+      <section className="v-executive-section">
         <div className="v-shell">
-          <motion.div {...fadeUp(0)} style={{ marginBottom: 44, maxWidth: 600 }}>
-            <div
-              style={{
-                fontSize: 12.5,
-                fontWeight: 700,
-                color: "var(--gold)",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                marginBottom: 8,
-              }}
-            >
+          <motion.div {...fadeUp(0)} className="v-executive-header">
+            <span className="v-badge-gold">
               Executive Leadership
-            </div>
-            <h2
-              style={{
-                fontFamily: "'Fraunces', serif",
-                fontSize: "clamp(28px, 4vw, 40px)",
-                color: "#FAF6EF",
-                margin: "0 0 10px",
-                fontWeight: 480,
-                lineHeight: 1.15,
-              }}
-            >
+            </span>
+            <h2>
               The People Behind The Paint.
             </h2>
-            <p style={{ color: "#C5D1C4", fontSize: 15.5, lineHeight: 1.6 }}>
-              Direct leadership and factory oversight from our plant in Tarakeshwar, Kathmandu.
+            <p>
+              Direct chemical formulation oversight and plant leadership from our facility in Tarakeshwar, Kathmandu.
             </p>
           </motion.div>
 
-          <div className="v-grid-2">
+          <div className="v-executive-grid">
             {FOUNDERS.map((founder, i) => (
               <motion.div
                 key={founder.name}
-                {...fadeUp(i * 0.1)}
-                style={{
-                  background: "rgba(255, 255, 255, 0.05)",
-                  border: "1px solid rgba(255, 255, 255, 0.12)",
-                  borderRadius: 20,
-                  overflow: "hidden",
-                  display: "flex",
-                  flexDirection: "column",
-                  backdropFilter: "blur(10px)",
-                  transition: "border-color 0.3s ease",
-                }}
+                {...fadeUp(i * 0.12)}
+                className="v-executive-card"
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.35, ease: EASE_EXPO }}
               >
-                {/* Thin gold accent top border */}
-                <div style={{ height: 3, background: "var(--gold)" }} />
+                <div className="v-executive-card-top-accent" />
 
-                <div style={{ padding: "30px 26px", display: "flex", flexDirection: "column", gap: 20, flex: 1 }}>
-                  {/* Portrait + Info */}
-                  <div className="v-founder-leader-top">
-                    <div
-                      className="v-founder-leader-photo"
-                      style={{
-                        border: "2px solid rgba(173,124,59,0.5)",
-                        boxShadow: "0 10px 24px rgba(0,0,0,0.4)",
-                      }}
-                    >
+                <div className="v-executive-card-inner">
+                  {/* Portrait & Core Credentials */}
+                  <div className="v-executive-profile">
+                    <div className="v-executive-avatar-wrap">
                       <img
                         src={founder.img}
                         alt={founder.name}
+                        className="v-executive-avatar-img"
                         style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
                           objectPosition: i === 0 ? "center 5%" : "center 12%",
-                          display: "block",
                         }}
                         loading="lazy"
                         decoding="async"
                       />
+                      <div className="v-executive-avatar-badge" title="Active Plant Leadership">
+                        <Check size={12} strokeWidth={3} />
+                      </div>
                     </div>
 
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div
-                        style={{
-                          fontFamily: "'Fraunces', serif",
-                          fontSize: 22,
-                          color: "#FAF6EF",
-                          fontWeight: 500,
-                          lineHeight: 1.2,
-                          marginBottom: 4,
-                        }}
-                      >
-                        {founder.name}
-                      </div>
-                      <div style={{ fontSize: 13.5, color: "var(--gold)", fontWeight: 600, marginBottom: 8 }}>
-                        {founder.role}
-                      </div>
-                      {founder.phone && (
-                        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13.5, color: "#D2DDD0", marginBottom: 12 }}>
-                          <Phone size={14} style={{ color: "var(--gold)" }} />
-                          <a
-                            href={`tel:+977${founder.phone}`}
-                            style={{ color: "#FAF6EF", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
-                          >
-                            +977 {founder.phone}
-                          </a>
-                        </div>
-                      )}
-                      <div>
-                        <span
-                          style={{
-                            display: "inline-block",
-                            fontSize: 11,
-                            fontWeight: 700,
-                            letterSpacing: "0.05em",
-                            textTransform: "uppercase",
-                            padding: "3px 10px",
-                            borderRadius: 999,
-                            background: "rgba(255,255,255,0.08)",
-                            color: "#D2DDD0",
-                            border: "1px solid rgba(255,255,255,0.12)",
-                          }}
-                        >
-                          {founder.tag}
-                        </span>
-                      </div>
+                    <div className="v-executive-meta">
+                      <span className="v-executive-tag">{founder.tag}</span>
+                      <h3 className="v-executive-name">{founder.name}</h3>
+                      <div className="v-executive-role">{founder.role}</div>
                     </div>
                   </div>
 
-                  {/* Founder quote */}
-                  <div style={{ position: "relative", flex: 1, paddingTop: 4 }}>
-                    <p
-                      style={{
-                        fontFamily: "'Fraunces', serif",
-                        fontSize: 15,
-                        fontStyle: "italic",
-                        color: "rgba(246,241,231,0.85)",
-                        lineHeight: 1.65,
-                        margin: 0,
-                      }}
-                    >
-                      "{founder.vision}"
+                  {/* Vision Quote Block */}
+                  <div className="v-executive-quote-box">
+                    <Quote size={18} className="v-executive-quote-icon" />
+                    <p className="v-executive-quote-text">
+                      {founder.vision}
                     </p>
                   </div>
 
-                  {/* Direct Actions */}
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "flex-end",
-                      paddingTop: 16,
-                      borderTop: "1px solid rgba(255,255,255,0.08)",
-                      gap: 10,
-                      flexWrap: "wrap",
-                    }}
-                  >
+                  {/* Clean Direct Contact Actions */}
+                  <div className="v-executive-actions">
+                    <a
+                      href={`tel:+977${founder.phone}`}
+                      className="v-exec-action-call"
+                      aria-label={`Call ${founder.name}`}
+                    >
+                      <Phone size={14} />
+                      <span>+977 {founder.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3")}</span>
+                    </a>
                     <a
                       href={`https://wa.me/977${founder.phone}?text=Hello%20${encodeURIComponent(founder.name)},%20I%20am%20contacting%20you%20from%20the%20King%20Paints%20website.`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 6,
-                        background: "rgba(255,255,255,0.1)",
-                        color: "#FFFFFF",
-                        padding: "8px 16px",
-                        borderRadius: 999,
-                        fontSize: 13,
-                        fontWeight: 600,
-                        border: "1px solid rgba(255,255,255,0.2)",
-                        textDecoration: "none",
-                        transition: "background 0.2s",
-                      }}
+                      className="v-exec-action-wa"
+                      aria-label={`WhatsApp ${founder.name}`}
                     >
-                      <MessageSquare size={14} /> WhatsApp
-                    </a>
-                    <a
-                      href={`tel:+977${founder.phone}`}
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 6,
-                        background: "var(--ivory-soft)",
-                        color: "var(--forest-dark)",
-                        padding: "8px 18px",
-                        borderRadius: 999,
-                        fontSize: 13,
-                        fontWeight: 700,
-                        border: "none",
-                        textDecoration: "none",
-                      }}
-                    >
-                      <Phone size={14} /> Call Directly
+                      <MessageSquare size={14} />
+                      <span>WhatsApp Direct</span>
                     </a>
                   </div>
                 </div>
@@ -641,19 +522,7 @@ export default function AboutPage({ go }) {
               href="https://wa.me/9779851182340?text=Hello%20King%20Paints%20Nepal,%20I'd%20like%20to%20know%20more%20about%20your%20products%20and%20factory%20supply."
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                background: "#FFFFFF",
-                color: "var(--forest-dark)",
-                borderRadius: 999,
-                padding: "14px 28px",
-                fontSize: 15,
-                fontWeight: 700,
-                textDecoration: "none",
-                boxShadow: "0 4px 14px rgba(0,0,0,0.12)",
-              }}
+              className="v-about-wa-cta"
             >
               <MessageSquare size={16} /> WhatsApp Us
             </a>

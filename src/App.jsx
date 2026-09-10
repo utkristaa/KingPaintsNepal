@@ -68,7 +68,30 @@ export default function App() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.documentElement.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
   }, [menuOpen]);
+
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem("kp_theme");
+      if (saved) return saved === "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("kp_theme", darkMode ? "dark" : "light");
+    } catch {}
+  }, [darkMode]);
+
+  const toggleDark = () => setDarkMode((prev) => !prev);
 
   const selectedProduct = PRODUCTS.find((p) => p.id === productId);
   const [title, description] = PAGE_SEO[page] || ["Page Not Found | King Paints Nepal", "The page you requested could not be found on the King Paints Nepal website."];
@@ -77,11 +100,11 @@ export default function App() {
     : { "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE.website };
 
   return (
-    <div className="varna-root">
+    <div className={`varna-root ${darkMode ? "dark" : ""}`}>
       <Seo title={title} description={description} path={path} type={page === "product-detail" ? "product" : "website"} />
       <LocalBusinessSchema />
       <StructuredData data={schema} />
-      <Navbar page={page} go={go} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <Navbar page={page} go={go} menuOpen={menuOpen} setMenuOpen={setMenuOpen} darkMode={darkMode} toggleDark={toggleDark} />
       {page !== "home" && <div className="v-shell"><Breadcrumbs items={[{ label: "Home", href: "/" }, { label: page === "not-found" ? "Page Not Found" : (page === "product-detail" ? "Products" : PAGE_SEO[page][0]) }]} /></div>}
 
       {page === "home" && <HomePage go={go} viewProduct={viewProduct} />}
@@ -102,8 +125,13 @@ export default function App() {
       <motion.div
         className="v-whatsapp-float"
         initial={{ opacity: 0, scale: 0.8, y: 16 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        animate={{
+          opacity: menuOpen ? 0 : 1,
+          scale: menuOpen ? 0.8 : 1,
+          y: menuOpen ? 16 : 0,
+        }}
+        style={{ pointerEvents: menuOpen ? "none" : "auto" }}
+        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >

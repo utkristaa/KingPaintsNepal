@@ -94,6 +94,7 @@ export default function HomePage({ go, viewProduct }) {
             variants={heroContainerVariants}
             initial="hidden"
             animate="visible"
+            className="v-hero-content"
           >
             <motion.div variants={textLineVariants} className="v-badge">
               <span className="v-badge-dot" />Manufactured in Kathmandu, Nepal
@@ -108,7 +109,7 @@ export default function HomePage({ go, viewProduct }) {
               <br />
               <span className="v-mask-wrap">
                 <motion.span variants={textLineVariants} style={{ display: "inline-block" }}>
-                  In-House in Kathmandu.
+                  <span style={{ whiteSpace: "nowrap" }}>In-House</span> in Kathmandu.
                 </motion.span>
               </span>
             </h1>
@@ -187,7 +188,7 @@ export default function HomePage({ go, viewProduct }) {
       </section>
 
       {/* Stats with staggered viewport counter cards — Striking Colorful Cards */}
-      <section className="v-shell" style={{ padding: "48px 0 20px" }}>
+      <section className="v-shell" style={{ padding: "24px 0 32px" }}>
         <motion.div
           className="v-stats-cards-grid"
           variants={statsContainerVariants}
@@ -196,30 +197,25 @@ export default function HomePage({ go, viewProduct }) {
           viewport={{ once: true, margin: "-40px" }}
         >
           {[
-            { num: "100% In-House", label: "Tarakeshwar plant synthesis", accent: "#BE4B2A", bg: "linear-gradient(145deg, #FFFFFF 0%, #FAF0EC 100%)", border: "#F0CFC5" },
-            { num: "0% Lead", label: "Zero heavy metals, family-safe", accent: "#C78B2A", bg: "linear-gradient(145deg, #FFFFFF 0%, #FAF5E8 100%)", border: "#EEDBB7" },
-            { num: "≥ 98.5%", label: "Lab-verified two-coat opacity", accent: "#1B5276", bg: "linear-gradient(145deg, #FFFFFF 0%, #EFF5F9 100%)", border: "#C4DCEB" },
-            { num: "1L – 20L", label: "Consumer & contractor buckets", accent: "#2A6B44", bg: "linear-gradient(145deg, #FFFFFF 0%, #EEF6F1 100%)", border: "#C5E1CF" },
+            { num: "100% In-House", label: "Tarakeshwar plant synthesis", accent: "var(--terracotta)" },
+            { num: "0% Lead", label: "Zero heavy metals, family-safe", accent: "var(--ochre)" },
+            { num: "≥ 98.5%", label: "Lab-verified two-coat opacity", accent: "var(--slate-blue)" },
+            { num: "1L – 20L", label: "Consumer & contractor buckets", accent: "var(--moss)" },
           ].map((s) => (
             <motion.div
               key={s.num}
               variants={statItemVariants}
+              className="v-stat-card"
               style={{
-                background: s.bg,
-                border: `1.5px solid ${s.border}`,
-                borderRadius: 18,
-                padding: "24px 26px",
-                position: "relative",
-                overflow: "hidden",
-                boxShadow: "0 6px 18px rgba(0,0,0,0.03)",
+                "--card-accent": s.accent,
               }}
-              whileHover={{ y: -4, borderColor: s.accent, boxShadow: `0 12px 24px -6px ${s.accent}25` }}
+              whileHover={{ y: -4 }}
             >
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: s.accent }} />
-              <div style={{ fontFamily: "'Fraunces', serif", fontSize: 32, color: s.accent, fontWeight: 700, marginBottom: 4 }}>
+              <div style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(22px, 2.2vw, 30px)", color: s.accent, fontWeight: 700, marginBottom: 4, whiteSpace: "nowrap" }}>
                 {s.num}
               </div>
-              <div style={{ fontSize: 13.5, color: "var(--charcoal-soft)", fontWeight: 500 }}>
+              <div className="v-stat-card-label" style={{ fontSize: 13, fontWeight: 500, lineHeight: 1.45 }}>
                 {s.label}
               </div>
             </motion.div>
@@ -268,33 +264,25 @@ export default function HomePage({ go, viewProduct }) {
                 icon: Factory,
                 title: "In-House Resin Synthesis",
                 desc: "Our Kathmandu facility supports local formulation and polymer production for residential, commercial, and project enquiries.",
-                accent: "#BE4B2A",
-                bg: "linear-gradient(145deg, #FFFFFF 0%, #FAF0EC 100%)",
-                border: "#F0CFC5",
+                accent: "var(--terracotta)",
               },
               {
                 icon: Flame,
                 title: "Thermal Cross-Linking",
                 desc: "We engineer paint solutions according to surface temperature, moisture exposure, and durability requirements.",
-                accent: "#C78B2A",
-                bg: "linear-gradient(145deg, #FFFFFF 0%, #FAF5E8 100%)",
-                border: "#EEDBB7",
+                accent: "var(--ochre)",
               },
               {
                 icon: ShieldCheck,
                 title: "Climate-Specific Formulation",
                 desc: "Formulated specifically for Nepal's harsh UV index, monsoon dampness, and masonry characteristics.",
-                accent: "#1B5276",
-                bg: "linear-gradient(145deg, #FFFFFF 0%, #EFF5F9 100%)",
-                border: "#C4DCEB",
+                accent: "var(--slate-blue)",
               },
               {
                 icon: Boxes,
                 title: "Manufactured, Not Resold",
                 desc: "King Paints Nepal manufactures directly at our Tarakeshwar plant with full chemical quality control.",
-                accent: "#2A6B44",
-                bg: "linear-gradient(145deg, #FFFFFF 0%, #EEF6F1 100%)",
-                border: "#C5E1CF",
+                accent: "var(--moss)",
               },
             ].map((f) => {
               const Icon = f.icon;
@@ -302,29 +290,23 @@ export default function HomePage({ go, viewProduct }) {
                 <motion.div
                   key={f.title}
                   variants={featureItemVariants}
-                  className="v-feature"
+                  className="v-feature-card"
                   style={{
-                    background: f.bg,
-                    border: `1.5px solid ${f.border}`,
-                    borderRadius: 20,
-                    padding: "28px 24px",
-                    position: "relative",
-                    overflow: "hidden",
-                    boxShadow: "0 6px 18px rgba(0,0,0,0.03)",
+                    "--card-accent": f.accent,
                   }}
-                  whileHover={{ y: -5, borderColor: f.accent, boxShadow: `0 14px 28px -6px ${f.accent}20` }}
+                  whileHover={{ y: -5 }}
                 >
                   <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: f.accent }} />
                   <motion.div
                     className="v-feature-icon"
-                    style={{ background: f.accent, color: "#FFFFFF", boxShadow: `0 4px 12px ${f.accent}40`, marginBottom: 18 }}
+                    style={{ background: f.accent, color: "#FFFFFF", marginBottom: 18 }}
                     whileHover={{ scale: 1.1, rotate: 2 }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
                     <Icon size={22} />
                   </motion.div>
-                  <h3 style={{ fontSize: 19, marginBottom: 8, color: "var(--forest-dark)" }}>{f.title}</h3>
-                  <p style={{ fontSize: 14, color: "var(--charcoal-soft)", lineHeight: 1.6 }}>{f.desc}</p>
+                  <h3 className="v-feature-title" style={{ fontSize: 19, marginBottom: 8 }}>{f.title}</h3>
+                  <p className="v-feature-desc" style={{ fontSize: 14, lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
                 </motion.div>
               );
             })}

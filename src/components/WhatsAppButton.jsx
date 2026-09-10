@@ -14,7 +14,7 @@ export default function WhatsAppButton({ variant = "outline", size = "md", messa
       size={size}
       icon={MessageCircle}
     >
-      {label}
+      <span>{label}</span>
     </Button>
   );
 }

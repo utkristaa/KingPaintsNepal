@@ -98,15 +98,13 @@ export default function ContactPage() {
                 <input id="phone" inputMode="tel" value={form.phone} onChange={handleChange("phone")} placeholder="98XXXXXXXX" />
               </div>
             </div>
-            <div className="v-form-grid">
-              <div className="v-field">
-                <label htmlFor="subject">Subject</label>
-                <select id="subject" value={form.subject} onChange={handleChange("subject")}>
-                  {ENQUIRY_SUBJECTS.map((s) => (
-                    <option key={s} value={s}>{s}</option>
-                  ))}
-                </select>
-              </div>
+            <div className="v-field" style={{ marginBottom: 18 }}>
+              <label htmlFor="subject">Subject</label>
+              <select id="subject" value={form.subject} onChange={handleChange("subject")}>
+                {ENQUIRY_SUBJECTS.map((s) => (
+                  <option key={s} value={s}>{s}</option>
+                ))}
+              </select>
             </div>
             <div className="v-field" style={{ marginBottom: 24 }}>
               <label htmlFor="message">Message</label>

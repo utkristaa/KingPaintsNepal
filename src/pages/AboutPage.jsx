@@ -1,210 +1,667 @@
 import React from "react";
-import { CheckCircle2, Factory, Flame, ShieldCheck, Leaf } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  CheckCircle2, Factory, Flame, ShieldCheck, Leaf, Quote,
+  Phone, MessageSquare, Beaker, Gauge, Cpu, Layers, Sliders, Check
+} from "lucide-react";
 import { TIMELINE } from "../data/timeline.js";
 import { MACHINERY_CATEGORIES } from "../data/machinery.js";
 import Button from "../components/Button.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import SafeImage from "../components/SafeImage.jsx";
 
+const EASE_EXPO = [0.16, 1, 0.3, 1];
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.65, ease: EASE_EXPO, delay },
+});
+
+const FOUNDERS = [
+  {
+    name: "Krishna Bahadur Adhikari",
+    role: "Founder & Managing Director",
+    phone: "9851182340",
+    img: "/founder-krishna.jpg",
+    tag: "Founder & Plant Leadership",
+    vision:
+      "We founded King Paints Nepal in Tarakeshwar, Kathmandu with a clear conviction: Nepal deserves high-grade, architecturally sound paints made locally, not just shipped in. Every batch that leaves our factory floor reflects our personal commitment to purity, durability, and honest value.",
+  },
+  {
+    name: "Ujjwal Adhikari",
+    role: "Co-Founder & Head of Operations",
+    phone: "9851033919",
+    img: "/founder-ujjwal.jpg",
+    tag: "Co-Founder & Operations",
+    vision:
+      "Paint isn't just color in a bucket — it's surface chemistry. Our formulations are engineered specifically for Nepal's masonry characteristics, extreme temperature swings, and monsoon humidity so your walls remain clean and protected for years.",
+  },
+];
+
+const FACTORY_STEPS = [
+  {
+    step: "01",
+    title: "Raw Material & Pigment Assay",
+    icon: Beaker,
+    desc: "Inspection of pure Rutile Titanium Dioxide (TiO₂), micro-fine natural calcites, and 100% pure acrylic copolymer binders to verify zero moisture contamination.",
+  },
+  {
+    step: "02",
+    title: "High-Shear Dispersion",
+    icon: Cpu,
+    desc: "Industrial Cowles dissolvers operating at calibrated variable speeds break pigment agglomerates into sub-micron particles for complete binder wetting.",
+  },
+  {
+    step: "03",
+    title: "Precision Bead Milling",
+    icon: Layers,
+    desc: "Closed-chamber horizontal sand and bead mills grind the pigment paste to sub-15 micron fineness on the Hegman gauge, maximizing opacity and finish consistency.",
+  },
+  {
+    step: "04",
+    title: "Laboratory QC & Stress Testing",
+    icon: Gauge,
+    desc: "Every batch is verified on Stormer viscometers (95–105 KU), opacity drawdown charts, and mechanical wet-scrub washability test stands before approval.",
+  },
+  {
+    step: "05",
+    title: "Centrifugal Micro-Filtration",
+    icon: Sliders,
+    desc: "Continuous double-mesh mechanical sieves remove any micro-particulates, ensuring smooth, effortless flow on brushes, rollers, and spray systems.",
+  },
+  {
+    step: "06",
+    title: "Volumetric Filling & Traceability",
+    icon: Factory,
+    desc: "Pneumatic volumetric dispensers accurately package paint into 1L, 4L, 10L, and 20L containers, sealed and labeled with batch numbers and manufacture dates.",
+  },
+];
+
+const QC_STANDARDS = [
+  {
+    metric: "Opacity & Contrast Ratio",
+    value: "≥ 98.5%",
+    desc: "Verified on Leneta drawdown opacity charts for superior two-coat hiding power.",
+  },
+  {
+    metric: "Viscosity Control",
+    value: "95 – 105 KU",
+    desc: "Calibrated via Stormer Krebs Viscometer to eliminate roller spatter and brush drag.",
+  },
+  {
+    metric: "Wet Scrub Resistance",
+    value: "5,000+ Cycles",
+    desc: "Tested per ASTM D2486 to ensure dependable washability and stain removal.",
+  },
+  {
+    metric: "Heavy Metal Safety",
+    value: "0% Lead Added",
+    desc: "Zero added lead, mercury, or harmful chromium compounds, safe for families.",
+  },
+  {
+    metric: "Himalayan UV Resilience",
+    value: "UV Index 11+",
+    desc: "Photostable acrylic resins formulated to resist chalking under high-altitude sun.",
+  },
+  {
+    metric: "Anti-Fungal Protection",
+    value: "Class 1 Biocide",
+    desc: "Built-in fungal and efflorescence inhibitors engineered for monsoon dampness.",
+  },
+];
+
 export default function AboutPage({ go }) {
   return (
     <>
-      {/* Intro */}
+      {/* Page Hero */}
       <div className="v-shell">
-        <div className="v-about-hero">
-          <div className="v-section-label">Who We Are</div>
-          <h1 style={{ fontSize: 46, marginBottom: 18 }}>A paint manufacturer based in Kathmandu.</h1>
-          <p style={{ fontSize: 17, color: "var(--charcoal-soft)", lineHeight: 1.7 }}>
-            King Paints Nepal develops a locally manufactured paint range from its facility in Tarakeshwar Municipality,
-            Ward 5, Kathmandu. Contact the team for current product, project, and availability information.
+        <motion.div className="v-about-hero" {...fadeUp(0)}>
+          <div className="v-badge">
+            <span className="v-badge-dot" />
+            Kathmandu Manufacturing Facility
+          </div>
+          <h1 style={{ fontSize: "clamp(34px, 5vw, 52px)", marginBottom: 18, lineHeight: 1.08 }}>
+            Paint Manufacturing<br />In-House in Kathmandu.
+          </h1>
+          <p style={{ fontSize: 17, color: "var(--charcoal-soft)", lineHeight: 1.7, maxWidth: 640 }}>
+            King Paints Nepal formulates and produces architectural coatings from our facility in
+            Tarakeshwar Municipality, Ward 5, Kathmandu. Designed and manufactured for Nepal’s climate,
+            masonry, and architectural requirements.
           </p>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Story timeline */}
+      {/* Leadership & Founders Section — High-End Executive Presentation */}
+      <section
+        style={{
+          background: "linear-gradient(180deg, #142821 0%, #0F201A 100%)",
+          padding: "80px 0",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div className="v-shell">
+          <motion.div {...fadeUp(0)} style={{ marginBottom: 44, maxWidth: 600 }}>
+            <div
+              style={{
+                fontSize: 12.5,
+                fontWeight: 700,
+                color: "var(--gold)",
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                marginBottom: 8,
+              }}
+            >
+              Executive Leadership
+            </div>
+            <h2
+              style={{
+                fontFamily: "'Fraunces', serif",
+                fontSize: "clamp(28px, 4vw, 40px)",
+                color: "#FAF6EF",
+                margin: "0 0 10px",
+                fontWeight: 480,
+                lineHeight: 1.15,
+              }}
+            >
+              The People Behind The Paint.
+            </h2>
+            <p style={{ color: "#C5D1C4", fontSize: 15.5, lineHeight: 1.6 }}>
+              Direct leadership and factory oversight from our plant in Tarakeshwar, Kathmandu.
+            </p>
+          </motion.div>
+
+          <div className="v-grid-2">
+            {FOUNDERS.map((founder, i) => (
+              <motion.div
+                key={founder.name}
+                {...fadeUp(i * 0.1)}
+                style={{
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.12)",
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                  backdropFilter: "blur(10px)",
+                  transition: "border-color 0.3s ease",
+                }}
+              >
+                {/* Thin gold accent top border */}
+                <div style={{ height: 3, background: "var(--gold)" }} />
+
+                <div style={{ padding: "30px 26px", display: "flex", flexDirection: "column", gap: 20, flex: 1 }}>
+                  {/* Portrait + Info */}
+                  <div className="v-founder-leader-top">
+                    <div
+                      className="v-founder-leader-photo"
+                      style={{
+                        border: "2px solid rgba(173,124,59,0.5)",
+                        boxShadow: "0 10px 24px rgba(0,0,0,0.4)",
+                      }}
+                    >
+                      <img
+                        src={founder.img}
+                        alt={founder.name}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          objectPosition: i === 0 ? "center 5%" : "center 12%",
+                          display: "block",
+                        }}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div
+                        style={{
+                          fontFamily: "'Fraunces', serif",
+                          fontSize: 22,
+                          color: "#FAF6EF",
+                          fontWeight: 500,
+                          lineHeight: 1.2,
+                          marginBottom: 4,
+                        }}
+                      >
+                        {founder.name}
+                      </div>
+                      <div style={{ fontSize: 13.5, color: "var(--gold)", fontWeight: 600, marginBottom: 8 }}>
+                        {founder.role}
+                      </div>
+                      {founder.phone && (
+                        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13.5, color: "#D2DDD0", marginBottom: 12 }}>
+                          <Phone size={14} style={{ color: "var(--gold)" }} />
+                          <a
+                            href={`tel:+977${founder.phone}`}
+                            style={{ color: "#FAF6EF", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+                          >
+                            +977 {founder.phone}
+                          </a>
+                        </div>
+                      )}
+                      <div>
+                        <span
+                          style={{
+                            display: "inline-block",
+                            fontSize: 11,
+                            fontWeight: 700,
+                            letterSpacing: "0.05em",
+                            textTransform: "uppercase",
+                            padding: "3px 10px",
+                            borderRadius: 999,
+                            background: "rgba(255,255,255,0.08)",
+                            color: "#D2DDD0",
+                            border: "1px solid rgba(255,255,255,0.12)",
+                          }}
+                        >
+                          {founder.tag}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Founder quote */}
+                  <div style={{ position: "relative", flex: 1, paddingTop: 4 }}>
+                    <p
+                      style={{
+                        fontFamily: "'Fraunces', serif",
+                        fontSize: 15,
+                        fontStyle: "italic",
+                        color: "rgba(246,241,231,0.85)",
+                        lineHeight: 1.65,
+                        margin: 0,
+                      }}
+                    >
+                      "{founder.vision}"
+                    </p>
+                  </div>
+
+                  {/* Direct Actions */}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-end",
+                      paddingTop: 16,
+                      borderTop: "1px solid rgba(255,255,255,0.08)",
+                      gap: 10,
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <a
+                      href={`https://wa.me/977${founder.phone}?text=Hello%20${encodeURIComponent(founder.name)},%20I%20am%20contacting%20you%20from%20the%20King%20Paints%20website.`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                        background: "rgba(255,255,255,0.1)",
+                        color: "#FFFFFF",
+                        padding: "8px 16px",
+                        borderRadius: 999,
+                        fontSize: 13,
+                        fontWeight: 600,
+                        border: "1px solid rgba(255,255,255,0.2)",
+                        textDecoration: "none",
+                        transition: "background 0.2s",
+                      }}
+                    >
+                      <MessageSquare size={14} /> WhatsApp
+                    </a>
+                    <a
+                      href={`tel:+977${founder.phone}`}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                        background: "var(--ivory-soft)",
+                        color: "var(--forest-dark)",
+                        padding: "8px 18px",
+                        borderRadius: 999,
+                        fontSize: 13,
+                        fontWeight: 700,
+                        border: "none",
+                        textDecoration: "none",
+                      }}
+                    >
+                      <Phone size={14} /> Call Directly
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6-Step Paint Factory Production Pipeline — Clean Cohesive Industrial Design */}
+      <section className="v-section" style={{ background: "var(--ivory-soft)", borderBottom: "1px solid var(--border)" }}>
+        <div className="v-shell">
+          <SectionHeading
+            label="Plant Operations"
+            title="From Raw Pigments to Sealed Tins."
+            description="Our manufacturing process follows strict formulation and quality assurance protocols at our Kathmandu facility."
+          />
+
+          <div className="v-process-grid" style={{ marginTop: 44 }}>
+            {FACTORY_STEPS.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <motion.div
+                  key={step.step}
+                  {...fadeUp(i * 0.07)}
+                  className="v-step-card"
+                  style={{
+                    background: "var(--white)",
+                    border: "1px solid var(--border)",
+                    borderRadius: 16,
+                    padding: "26px 24px",
+                    display: "flex",
+                    flexDirection: "column",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
+                    position: "relative",
+                  }}
+                  whileHover={{ y: -4, borderColor: "var(--forest)" }}
+                >
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+                    <div
+                      style={{
+                        width: 44,
+                        height: 44,
+                        borderRadius: 12,
+                        background: "var(--forest-tint)",
+                        color: "var(--forest-dark)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Icon size={22} />
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: "'Fraunces', serif",
+                        fontSize: 22,
+                        fontWeight: 600,
+                        color: "var(--charcoal-soft)",
+                        opacity: 0.45,
+                      }}
+                    >
+                      {step.step}
+                    </span>
+                  </div>
+
+                  <h3 style={{ fontSize: 18, marginBottom: 8, color: "var(--forest-dark)" }}>
+                    {step.title}
+                  </h3>
+                  <p style={{ fontSize: 14, color: "var(--charcoal-soft)", lineHeight: 1.6, margin: 0 }}>
+                    {step.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Quality Control & Scientific Testing Benchmarks — High-Precision Specification Cards */}
       <section className="v-section">
         <div className="v-shell">
           <SectionHeading
-            label="Our Story"
-            title="How King Paints Nepal was built."
-            description="King Paints Nepal is building a locally manufactured paint range from its Kathmandu facility."
+            label="Quality Control"
+            title="Formulation & Laboratory Standards."
+            description="Every batch is tested in our quality-control laboratory for opacity, washability, viscosity, and weather resistance."
           />
-          <div className="v-timeline">
+
+          <div className="v-qc-grid" style={{ marginTop: 44 }}>
+            {QC_STANDARDS.map((qc, i) => (
+              <motion.div
+                key={qc.metric}
+                {...fadeUp(i * 0.06)}
+                style={{
+                  background: "var(--white)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 16,
+                  padding: "24px 22px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 10,
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.02)",
+                }}
+                whileHover={{ y: -3, borderColor: "var(--forest)" }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 10 }}>
+                  <span style={{ fontSize: 14.5, fontWeight: 700, color: "var(--forest-dark)" }}>
+                    {qc.metric}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'Fraunces', serif",
+                      fontSize: 16,
+                      fontWeight: 700,
+                      color: "var(--forest-dark)",
+                      background: "var(--forest-tint)",
+                      padding: "3px 10px",
+                      borderRadius: 6,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {qc.value}
+                  </span>
+                </div>
+                <p style={{ fontSize: 13.5, color: "var(--charcoal-soft)", lineHeight: 1.55, margin: 0 }}>
+                  {qc.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Machinery & Heavy Plant Equipment */}
+      <section
+        className="v-section"
+        style={{
+          background: "var(--ivory-soft)",
+          borderTop: "1px solid var(--border)",
+          borderBottom: "1px solid var(--border)",
+        }}
+      >
+        <div className="v-shell">
+          <SectionHeading
+            label="Plant Equipment"
+            title="Manufacturing Hardware & Processing."
+            description="Our Tarakeshwar plant houses specialized industrial dispersion, milling, reaction, and automated canning units."
+          />
+
+          <div className="v-machinery-grid-6" style={{ marginTop: 40 }}>
+            {MACHINERY_CATEGORIES.map((m, i) => (
+              <motion.div
+                key={m.title}
+                {...fadeUp(i * 0.06)}
+                style={{
+                  background: "var(--white)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 14,
+                  padding: 22,
+                  display: "flex",
+                  gap: 16,
+                  alignItems: "flex-start",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.02)",
+                }}
+                whileHover={{ y: -3, borderColor: "var(--forest)" }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: 10,
+                    background: "var(--forest-tint)",
+                    color: "var(--forest-dark)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexShrink: 0,
+                  }}
+                >
+                  <Factory size={19} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: 16, color: "var(--forest-dark)", marginBottom: 5 }}>{m.title}</h4>
+                  <p style={{ fontSize: 13, color: "var(--charcoal-soft)", lineHeight: 1.55, marginBottom: 8 }}>
+                    {m.note}
+                  </p>
+                  {m.spec && (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        fontSize: 11.5,
+                        fontWeight: 600,
+                        color: "var(--charcoal-soft)",
+                        background: "var(--ivory-soft)",
+                        border: "1px solid var(--border)",
+                        padding: "2px 8px",
+                        borderRadius: 4,
+                      }}
+                    >
+                      {m.spec}
+                    </span>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Climate-Engineered Formulations */}
+      <section className="v-section">
+        <div className="v-shell">
+          <div className="v-split">
+            <motion.div className="v-split-img" {...fadeUp(0)}>
+              <SafeImage
+                src="https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=900&q=75"
+                alt="Paint formulation facility in Kathmandu"
+              />
+            </motion.div>
+            <motion.div {...fadeUp(0.1)}>
+              <div className="v-section-label">Climate-Engineered Formulations</div>
+              <h2 style={{ fontSize: 32, marginBottom: 16 }}>Formulated For Nepal's Weather Extremes.</h2>
+              <p style={{ color: "var(--charcoal-soft)", fontSize: 16, lineHeight: 1.7, marginBottom: 20 }}>
+                Standard imported paints are often formulated for dry or moderate climates. In Nepal, exterior walls must
+                endure intense Himalayan UV radiation, winter frost, and heavy monsoon downpours.
+              </p>
+              <div className="v-checklist">
+                <div className="v-check-item">
+                  <CheckCircle2 size={18} />
+                  <span><strong>UV-Resistant Binders:</strong> Engineered to minimize chalking and premature color fading.</span>
+                </div>
+                <div className="v-check-item">
+                  <CheckCircle2 size={18} />
+                  <span><strong>Breathable Moisture Barrier:</strong> Prevents rain penetration while allowing internal masonry vapor to vent.</span>
+                </div>
+                <div className="v-check-item">
+                  <CheckCircle2 size={18} />
+                  <span><strong>Efflorescence Resistance:</strong> Specifically formulated for local brick and plaster alkalinity.</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Company Timeline */}
+      <section className="v-section" style={{ background: "var(--ivory-soft)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
+        <div className="v-shell">
+          <SectionHeading
+            label="Plant Timeline"
+            title="Our Manufacturing Journey."
+            description="From initial factory foundations in Tarakeshwar to an active architectural coatings plant."
+          />
+          <div className="v-timeline" style={{ marginTop: 44 }}>
             {TIMELINE.map((item, i) => (
-              <div className="v-timeline-item" key={i}>
+              <motion.div className="v-timeline-item" key={i} {...fadeUp(i * 0.08)}>
                 <div className="v-timeline-marker">
                   <div className="v-timeline-dot" />
                   {i < TIMELINE.length - 1 && <div className="v-timeline-line" />}
                 </div>
                 <div className="v-timeline-content">
-                  <div className="v-timeline-year">{item.year}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
+                  <div className="v-timeline-year">
+                    {item.year}
+                  </div>
+                  <h3 style={{ fontSize: 20, marginBottom: 8, color: "var(--forest-dark)" }}>{item.title}</h3>
+                  <p style={{ fontSize: 15, color: "var(--charcoal-soft)", lineHeight: 1.65 }}>{item.description}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Founders */}
-      <section className="v-section-tight" style={{ background: "var(--ivory-soft)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
-        <div className="v-shell">
-          <SectionHeading label="Leadership" title="People behind the paint." description="Meet the team through the contact channel for current company and project enquiries." />
-        </div>
-      </section>
-
-      {/* Manufacturing facility */}
-      <section className="v-section">
-        <div className="v-shell">
-          <div className="v-split">
-            <div className="v-split-img">
-              <SafeImage src="https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=1000&q=80" alt="Interior of a paint manufacturing facility" />
-            </div>
-            <div>
-              <div className="v-section-label">Our Manufacturing Facility</div>
-              <h2 style={{ fontSize: 34, marginBottom: 16 }}>A Kathmandu facility for local paint production.</h2>
-              <p style={{ color: "var(--charcoal-soft)", fontSize: 16, lineHeight: 1.7 }}>
-                Our facility in Tarakeshwar Municipality, Ward 5, Kathmandu, supports paint formulation, processing,
-                and packaging for the King Paints Nepal range.
-              </p>
-              <div className="v-checklist">
-                <div className="v-check-item"><CheckCircle2 size={18} /> Formulation, processing, and packaging under one roof</div>
-                <div className="v-check-item"><CheckCircle2 size={18} /> Located in Kathmandu, Nepal</div>
-                <div className="v-check-item"><CheckCircle2 size={18} /> Supporting local paint production</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Equipment categories */}
-      <section className="v-section-tight" style={{ background: "var(--ivory-soft)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
-        <div className="v-shell">
-          <SectionHeading
-            label="Manufacturing Capabilities"
-            title="The categories of equipment behind our process."
-            description="Our facility supports formulation, processing, quality control, and packaging under one roof."
-          />
-          <div className="v-machinery-grid">
-            {MACHINERY_CATEGORIES.map((m, i) => (
-              <div className="v-machinery-item" key={i}>
-                <Factory size={18} />
-                <div>
-                  <div className="v-machinery-title">{m.title}</div>
-                  <div className="v-machinery-note">{m.note}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Technology */}
-      <section className="v-section">
-        <div className="v-shell">
-          <SectionHeading label="Our Technology" title="Built from the molecule up." />
-          <div className="v-feature-grid" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
-            <div className="v-feature">
-              <div className="v-feature-icon"><Factory size={22} /></div>
-              <h3>Resin Synthesis</h3>
-              <p>Our process is designed around local formulation and production, with product and availability details confirmed directly with the team.</p>
-            </div>
-            <div className="v-feature">
-              <div className="v-feature-icon"><Flame size={22} /></div>
-              <h3>Thermal Cross-Linking</h3>
-              <p>We select and discuss paint solutions according to the surface, environment, and finish required by each project.</p>
-            </div>
-            <div className="v-feature">
-              <div className="v-feature-icon"><ShieldCheck size={22} /></div>
-              <h3>Climate-Customized Batches</h3>
-              <p>Contact our team for current information about available products, finishes, and recommended applications.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Quality philosophy */}
-      <section className="v-section-tight" style={{ background: "var(--ivory-soft)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
-        <div className="v-shell">
-          <div className="v-split" style={{ gridTemplateColumns: "1fr 1fr" }}>
-            <div>
-              <div className="v-section-label">Quality Philosophy</div>
-              <h2 style={{ fontSize: 34, marginBottom: 16 }}>Consistency comes from control, not chance.</h2>
-              <p style={{ color: "var(--charcoal-soft)", fontSize: 16, lineHeight: 1.7 }}>
-                Because we synthesize our own resins and control every stage of processing, we're able to hold each
-                batch to the same standard rather than relying on ingredients sourced from outside suppliers. Our
-                quality-control laboratory supports this process from raw material through to the finished product.
-              </p>
-            </div>
-            <div className="v-split-img" style={{ height: 320 }}>
-              <SafeImage src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=80" alt="Paint tins being checked for quality" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Environmental responsibility */}
-      <section className="v-section">
-        <div className="v-shell">
-          <div className="v-value-grid" style={{ gridTemplateColumns: "1fr" }}>
-            <div className="v-value-card" style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
-              <div className="v-feature-icon" style={{ marginBottom: 0, flexShrink: 0 }}><Leaf size={22} /></div>
-              <div>
-                <h3>Environmental Responsibility</h3>
-                <p>We consider responsible operation, careful material handling, and efficient manufacturing part of the work required to make dependable paint locally.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications */}
-      <section className="v-section-tight" style={{ background: "var(--ivory-soft)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
-        <div className="v-shell">
-          <SectionHeading label="Certifications & Approvals" title="Manufacturing with care." description="Contact the King Paints Nepal team for current documentation and approvals relevant to your project." />
-        </div>
-      </section>
-
-      {/* Where we're going */}
-      <section className="v-section">
-        <div className="v-shell">
-          <div className="v-split">
-            <div>
-              <div className="v-section-label">Where We're Going Next</div>
-              <h2 style={{ fontSize: 34, marginBottom: 16 }}>Building on the facility we've put in place.</h2>
-              <p style={{ color: "var(--charcoal-soft)", fontSize: 16, lineHeight: 1.7 }}>
-                Our near-term focus is finishing our full product catalogue and colour library, expanding our dealer
-                network across Nepal, and continuing to invest in our in-house manufacturing and formulation
-                capability from our Kathmandu facility.
-              </p>
-            </div>
-            <div className="v-split-img">
-              <SafeImage src="https://images.unsplash.com/photo-1523419409543-a5e549c1faa8?auto=format&fit=crop&w=1000&q=80" alt="Exterior of a manufacturing building" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="v-shell">
-        <div className="v-stats" style={{ marginBottom: 40 }}>
+      {/* Plant Snapshot / Key Figures */}
+      <section className="v-shell" style={{ padding: "64px 0" }}>
+        <div className="v-stats" style={{ marginBottom: 0 }}>
           <div className="v-stats-grid v-stats-grid-3">
-            <div><div className="v-stat-num">Local</div><div className="v-stat-label">Kathmandu production</div></div>
-            <div><div className="v-stat-num">Nepal</div><div className="v-stat-label">Built for local projects</div></div>
-            <div><div className="v-stat-num">Kathmandu</div><div className="v-stat-label">Facility Location, Nepal</div></div>
+            <div>
+              <div className="v-stat-num">100%</div>
+              <div className="v-stat-label">In-House Kathmandu Synthesis</div>
+            </div>
+            <div>
+              <div className="v-stat-num">0% Lead</div>
+              <div className="v-stat-label">Zero Heavy Metal Formulations</div>
+            </div>
+            <div>
+              <div className="v-stat-num">1L – 20L</div>
+              <div className="v-stat-label">Contractor & Residential Packs</div>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* CTA Band */}
       <section className="v-shell" style={{ paddingBottom: 96 }}>
-        <div className="v-cta-band">
+        <motion.div
+          className="v-cta-band"
+          {...fadeUp(0)}
+        >
           <div>
-            <h2>Want to know more about our facility?</h2>
-            <p>Reach out to our team to learn more about our manufacturing process and quality standards.</p>
+            <h2>Have questions about our facility or bulk supply?</h2>
+            <p>
+              Call Founders Krishna Bahadur Adhikari (<strong>9851182340</strong>) or Ujjwal Adhikari (<strong>9851033919</strong>) for factory-direct inquiries.
+            </p>
           </div>
-          <Button variant="light" onClick={() => go("contact")}>Talk to Our Team</Button>
-        </div>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+            <a
+              href="https://wa.me/9779851182340?text=Hello%20King%20Paints%20Nepal,%20I'd%20like%20to%20know%20more%20about%20your%20products%20and%20factory%20supply."
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "#FFFFFF",
+                color: "var(--forest-dark)",
+                borderRadius: 999,
+                padding: "14px 28px",
+                fontSize: 15,
+                fontWeight: 700,
+                textDecoration: "none",
+                boxShadow: "0 4px 14px rgba(0,0,0,0.12)",
+              }}
+            >
+              <MessageSquare size={16} /> WhatsApp Us
+            </a>
+            <Button variant="outline-light" onClick={() => go("contact")}>
+              Get in Touch
+            </Button>
+          </div>
+        </motion.div>
       </section>
     </>
   );

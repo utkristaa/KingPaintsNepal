@@ -28,7 +28,7 @@ export default function DealerPage() {
       </div>
 
       <div className="v-colour-toolbar" style={{ justifyContent: "flex-start" }}>
-        <div className="v-search-box" style={{ minWidth: 340 }}>
+        <div className="v-search-box" style={{ minWidth: "min(100%, 340px)" }}>
           <Search size={16} color="var(--charcoal-soft)" />
           <input
             type="text"

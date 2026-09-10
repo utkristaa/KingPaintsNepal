@@ -186,30 +186,45 @@ export default function HomePage({ go, viewProduct }) {
         </div>
       </section>
 
-      {/* Stats with staggered viewport counter cards */}
-      <section className="v-shell">
-        <div className="v-stats">
-          <motion.div
-            className="v-stats-grid v-stats-grid-3"
-            variants={statsContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-          >
-            <motion.div variants={statItemVariants}>
-              <div className="v-stat-num">Local</div>
-              <div className="v-stat-label">Kathmandu manufacturing</div>
+      {/* Stats with staggered viewport counter cards — Striking Colorful Cards */}
+      <section className="v-shell" style={{ padding: "48px 0 20px" }}>
+        <motion.div
+          className="v-stats-cards-grid"
+          variants={statsContainerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+        >
+          {[
+            { num: "100% In-House", label: "Tarakeshwar plant synthesis", accent: "#BE4B2A", bg: "linear-gradient(145deg, #FFFFFF 0%, #FAF0EC 100%)", border: "#F0CFC5" },
+            { num: "0% Lead", label: "Zero heavy metals, family-safe", accent: "#C78B2A", bg: "linear-gradient(145deg, #FFFFFF 0%, #FAF5E8 100%)", border: "#EEDBB7" },
+            { num: "≥ 98.5%", label: "Lab-verified two-coat opacity", accent: "#1B5276", bg: "linear-gradient(145deg, #FFFFFF 0%, #EFF5F9 100%)", border: "#C4DCEB" },
+            { num: "1L – 20L", label: "Consumer & contractor buckets", accent: "#2A6B44", bg: "linear-gradient(145deg, #FFFFFF 0%, #EEF6F1 100%)", border: "#C5E1CF" },
+          ].map((s) => (
+            <motion.div
+              key={s.num}
+              variants={statItemVariants}
+              style={{
+                background: s.bg,
+                border: `1.5px solid ${s.border}`,
+                borderRadius: 18,
+                padding: "24px 26px",
+                position: "relative",
+                overflow: "hidden",
+                boxShadow: "0 6px 18px rgba(0,0,0,0.03)",
+              }}
+              whileHover={{ y: -4, borderColor: s.accent, boxShadow: `0 12px 24px -6px ${s.accent}25` }}
+            >
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: s.accent }} />
+              <div style={{ fontFamily: "'Fraunces', serif", fontSize: 32, color: s.accent, fontWeight: 700, marginBottom: 4 }}>
+                {s.num}
+              </div>
+              <div style={{ fontSize: 13.5, color: "var(--charcoal-soft)", fontWeight: 500 }}>
+                {s.label}
+              </div>
             </motion.div>
-            <motion.div variants={statItemVariants}>
-              <div className="v-stat-num">Nepal</div>
-              <div className="v-stat-label">Made for local projects</div>
-            </motion.div>
-            <motion.div variants={statItemVariants}>
-              <div className="v-stat-num">Kathmandu</div>
-              <div className="v-stat-label">Facility Location, Nepal</div>
-            </motion.div>
-          </motion.div>
-        </div>
+          ))}
+        </motion.div>
       </section>
 
       {/* Featured products */}
@@ -218,7 +233,7 @@ export default function HomePage({ go, viewProduct }) {
           <div className="v-section-head-row" style={{ marginBottom: 48 }}>
             <SectionHeading
               label="Featured Products"
-              title="Our product catalogue is being finalized."
+              title="Architectural Coatings & Emulsions."
               description="Explore paint categories manufactured at our Kathmandu facility, then contact us for project-specific specifications."
             />
             <Button variant="ghost" onClick={() => go("products")}>
@@ -233,7 +248,7 @@ export default function HomePage({ go, viewProduct }) {
         </div>
       </section>
 
-      {/* Why choose us — manufacturing & technology positioning */}
+      {/* Why choose us — manufacturing & technology positioning with striking colors */}
       <section className="v-section-tight" style={{ background: "var(--ivory-soft)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
         <div className="v-shell">
           <SectionHeading
@@ -248,34 +263,71 @@ export default function HomePage({ go, viewProduct }) {
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
           >
-            <motion.div variants={featureItemVariants} className="v-feature">
-              <motion.div className="v-feature-icon" whileHover={{ scale: 1.1, rotate: 2 }} transition={{ type: "spring", stiffness: 400 }}>
-                <Factory size={22} />
-              </motion.div>
-              <h3>In-House Resin Synthesis</h3>
-              <p>Our Kathmandu facility supports local formulation and production for residential, commercial, and project enquiries.</p>
-            </motion.div>
-            <motion.div variants={featureItemVariants} className="v-feature">
-              <motion.div className="v-feature-icon" whileHover={{ scale: 1.1, rotate: 2 }} transition={{ type: "spring", stiffness: 400 }}>
-                <Flame size={22} />
-              </motion.div>
-              <h3>Thermal Cross-Linking</h3>
-              <p>We work with customers to identify suitable paint categories and finishes for their surfaces, locations, and project requirements.</p>
-            </motion.div>
-            <motion.div variants={featureItemVariants} className="v-feature">
-              <motion.div className="v-feature-icon" whileHover={{ scale: 1.1, rotate: 2 }} transition={{ type: "spring", stiffness: 400 }}>
-                <ShieldCheck size={22} />
-              </motion.div>
-              <h3>Climate-Specific Formulation</h3>
-              <p>Our team can help discuss practical product options for the conditions and finish your project requires.</p>
-            </motion.div>
-            <motion.div variants={featureItemVariants} className="v-feature">
-              <motion.div className="v-feature-icon" whileHover={{ scale: 1.1, rotate: 2 }} transition={{ type: "spring", stiffness: 400 }}>
-                <Boxes size={22} />
-              </motion.div>
-              <h3>Manufactured, Not Resold</h3>
-              <p>King Paints Nepal is building a locally manufactured range from its Kathmandu facility rather than presenting itself as a general marketplace.</p>
-            </motion.div>
+            {[
+              {
+                icon: Factory,
+                title: "In-House Resin Synthesis",
+                desc: "Our Kathmandu facility supports local formulation and polymer production for residential, commercial, and project enquiries.",
+                accent: "#BE4B2A",
+                bg: "linear-gradient(145deg, #FFFFFF 0%, #FAF0EC 100%)",
+                border: "#F0CFC5",
+              },
+              {
+                icon: Flame,
+                title: "Thermal Cross-Linking",
+                desc: "We engineer paint solutions according to surface temperature, moisture exposure, and durability requirements.",
+                accent: "#C78B2A",
+                bg: "linear-gradient(145deg, #FFFFFF 0%, #FAF5E8 100%)",
+                border: "#EEDBB7",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Climate-Specific Formulation",
+                desc: "Formulated specifically for Nepal's harsh UV index, monsoon dampness, and masonry characteristics.",
+                accent: "#1B5276",
+                bg: "linear-gradient(145deg, #FFFFFF 0%, #EFF5F9 100%)",
+                border: "#C4DCEB",
+              },
+              {
+                icon: Boxes,
+                title: "Manufactured, Not Resold",
+                desc: "King Paints Nepal manufactures directly at our Tarakeshwar plant with full chemical quality control.",
+                accent: "#2A6B44",
+                bg: "linear-gradient(145deg, #FFFFFF 0%, #EEF6F1 100%)",
+                border: "#C5E1CF",
+              },
+            ].map((f) => {
+              const Icon = f.icon;
+              return (
+                <motion.div
+                  key={f.title}
+                  variants={featureItemVariants}
+                  className="v-feature"
+                  style={{
+                    background: f.bg,
+                    border: `1.5px solid ${f.border}`,
+                    borderRadius: 20,
+                    padding: "28px 24px",
+                    position: "relative",
+                    overflow: "hidden",
+                    boxShadow: "0 6px 18px rgba(0,0,0,0.03)",
+                  }}
+                  whileHover={{ y: -5, borderColor: f.accent, boxShadow: `0 14px 28px -6px ${f.accent}20` }}
+                >
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: f.accent }} />
+                  <motion.div
+                    className="v-feature-icon"
+                    style={{ background: f.accent, color: "#FFFFFF", boxShadow: `0 4px 12px ${f.accent}40`, marginBottom: 18 }}
+                    whileHover={{ scale: 1.1, rotate: 2 }}
+                    transition={{ type: "spring", stiffness: 400 }}
+                  >
+                    <Icon size={22} />
+                  </motion.div>
+                  <h3 style={{ fontSize: 19, marginBottom: 8, color: "var(--forest-dark)" }}>{f.title}</h3>
+                  <p style={{ fontSize: 14, color: "var(--charcoal-soft)", lineHeight: 1.6 }}>{f.desc}</p>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -293,9 +345,9 @@ export default function HomePage({ go, viewProduct }) {
             <h2>Have a project or bulk order in mind?</h2>
             <p>Reach out by phone, WhatsApp, or the contact form and our team will get back to you.</p>
           </div>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
             <WhatsAppButton variant="light" />
-            <Button variant="outline" onClick={() => go("contact")}>Get in Touch</Button>
+            <Button variant="outline-light" onClick={() => go("contact")}>Get in Touch</Button>
           </div>
         </motion.div>
       </section>

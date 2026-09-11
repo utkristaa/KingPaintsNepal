@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import {
   CheckCircle2, Factory, Flame, ShieldCheck, Leaf, Quote,
-  Phone, MessageSquare, Beaker, Gauge, Cpu, Layers, Sliders, Check
+  Phone, MessageSquare, Beaker, Gauge, Cpu, Layers, Sliders
 } from "lucide-react";
 import { TIMELINE } from "../data/timeline.js";
 import { MACHINERY_CATEGORIES } from "../data/machinery.js";
@@ -29,7 +29,7 @@ const FOUNDERS = [
     img: "/founder-krishna.jpg",
     tag: "Founder & Plant Leadership",
     vision:
-      "We founded King Paints Nepal in Tarakeshwar, Kathmandu with a clear conviction: Nepal deserves high-grade, architecturally sound paints made locally, not just shipped in. Every batch that leaves our factory floor reflects our personal commitment to purity, durability, and honest value.",
+      "We started King Paints Nepal because families and builders in Nepal deserve reliable paint made here at home. We check every batch carefully so customers get a durable finish at a fair price.",
   },
   {
     name: "Ujjwal Adhikari",
@@ -38,7 +38,7 @@ const FOUNDERS = [
     img: "/founder-ujjwal.jpg",
     tag: "Co-Founder & Operations",
     vision:
-      "Paint isn't just color in a bucket — it's surface chemistry. Our formulations are engineered specifically for Nepal's masonry characteristics, extreme temperature swings, and monsoon humidity so your walls remain clean and protected for years.",
+      "Every wall and climate is different. We make our paints for Nepal's heat, monsoon weather, and common masonry surfaces, helping walls stay cleaner and protected for longer.",
   },
 ];
 
@@ -159,8 +159,6 @@ export default function AboutPage({ go }) {
                 whileHover={{ y: -6 }}
                 transition={{ duration: 0.35, ease: EASE_EXPO }}
               >
-                <div className="v-executive-card-top-accent" />
-
                 <div className="v-executive-card-inner">
                   {/* Portrait & Core Credentials */}
                   <div className="v-executive-profile">
@@ -175,9 +173,6 @@ export default function AboutPage({ go }) {
                         width={160}
                         height={160}
                       />
-                      <div className="v-executive-avatar-badge" title="Active Plant Leadership">
-                        <Check size={12} strokeWidth={3} />
-                      </div>
                     </div>
 
                     <div className="v-executive-meta">

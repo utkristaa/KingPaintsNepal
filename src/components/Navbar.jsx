@@ -67,11 +67,6 @@ export default function Navbar({ page, go, menuOpen, setMenuOpen, darkMode, togg
             </div>
 
             <div className="v-nav-right">
-              <a className="v-nav-phone" href={getPhoneHref(SITE.phones[0])}>
-                <Phone size={16} />
-                {formatNepalPhone(SITE.phones[0])}
-              </a>
-
               <button
                 type="button"
                 className="v-theme-toggle"

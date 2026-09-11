@@ -4,7 +4,6 @@ export const NAV_ITEMS = [
   { id: "colours", label: "Colour Library" },
   { id: "dealers", label: "Find a Dealer" },
   { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
 ];
 
 export const CATEGORIES = [

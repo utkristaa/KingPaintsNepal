@@ -75,7 +75,7 @@ html, body { margin: 0; padding: 0; }
 }
 
 .varna-root h1, .varna-root h2, .varna-root h3, .varna-root h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   color: var(--forest-dark);
   margin: 0;
   font-weight: 480;
@@ -205,20 +205,19 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 /* ---------- Navbar ---------- */
 .v-nav-wrap { position: sticky; top: 0; z-index: 50; background: rgba(246,241,231,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); }
-.v-nav { display: flex; align-items: center; justify-content: space-between; height: 84px; }
+.v-nav { display: flex; align-items: center; gap: 24px; min-width: 0; height: 84px; }
 .v-logo { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 560; color: var(--forest-dark); letter-spacing: -0.01em; }
 .v-logo span { color: var(--gold); }
-.v-nav-links { display: flex; align-items: center; gap: 36px; }
+.v-nav-links { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; gap: clamp(18px, 2.4vw, 36px); min-width: 0; white-space: nowrap; }
 .v-nav-link { font-size: 14.5px; font-weight: 500; color: var(--charcoal-soft); position: relative; padding: 4px 0; transition: color 0.2s ease; }
 .v-nav-link:hover { color: var(--forest-dark); }
 .v-nav-link.active { color: var(--forest-dark); }
 .v-nav-link.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--gold); border-radius: 2px; }
-.v-nav-right { display: flex; align-items: center; gap: 24px; }
-.v-nav-phone { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--forest-dark); }
+.v-nav-right { display: flex; flex: 0 0 auto; align-items: center; gap: 16px; white-space: nowrap; }
 .v-nav-burger { display: none; background: none; border: none; color: var(--forest-dark); min-width: 48px; min-height: 48px; align-items: center; justify-content: center; }
 
 @media (max-width: 980px) {
-  .v-nav-links, .v-nav-phone { display: none; }
+  .v-nav-links { display: none; }
   .v-nav-burger { display: flex; }
   .v-nav { height: 72px; }
 }
@@ -1337,9 +1336,6 @@ button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   color: #FAF5EB;
 }
 
-.varna-root.dark .v-nav-phone {
-  color: #FAF5EB;
-}
 
 .varna-root.dark .v-nav-burger {
   color: #FAF5EB;

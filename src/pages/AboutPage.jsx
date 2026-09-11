@@ -264,7 +264,7 @@ export default function AboutPage({ go }) {
                     </div>
                     <span
                       style={{
-                        fontFamily: "'Fraunces', serif",
+                        fontFamily: "var(--font-body)",
                         fontSize: 22,
                         fontWeight: 600,
                         color: "var(--charcoal-soft)",
@@ -320,7 +320,7 @@ export default function AboutPage({ go }) {
                   </span>
                   <span
                     style={{
-                      fontFamily: "'Fraunces', serif",
+                      fontFamily: "var(--font-body)",
                       fontSize: 16,
                       fontWeight: 700,
                       color: "var(--forest-dark)",

@@ -66,7 +66,7 @@ export default function AdminInquiriesPage() {
     } catch (requestError) {
       const localInquiries = getLocalInquiries();
       setInquiries(localInquiries);
-      setError(localInquiries.length ? "Showing locally saved inquiries. Connect DATABASE_URL on Vercel for shared storage." : requestError.message);
+      setError(localInquiries.length ? "Showing locally saved inquiries. Connect DATABASE_URL on Vercel for shared storage." : `${requestError.message}. Configure DATABASE_URL and run prisma:push for shared online inquiries.`);
     } finally {
       setLoading(false);
     }

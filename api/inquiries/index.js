@@ -1,8 +1,9 @@
-import { prisma } from "../_lib/prisma.js";
+import { databaseConfigured, prisma } from "../_lib/prisma.js";
 import { json, readJson, requireAdmin, validateInquiry } from "../_lib/http.js";
 
 export default async function handler(request, response) {
   if (request.method === "POST") {
+    if (!databaseConfigured()) return json(response, 503, { code: "DATABASE_NOT_CONFIGURED", error: "Inquiry storage is not configured. Add DATABASE_URL in Vercel and run npm run prisma:push." });
     try {
       const { inquiry, errors } = validateInquiry(readJson(request));
       if (Object.keys(errors).length > 0) return json(response, 400, { error: "Invalid inquiry", fields: errors });
@@ -16,6 +17,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     if (!requireAdmin(request, response)) return;
+    if (!databaseConfigured()) return json(response, 503, { code: "DATABASE_NOT_CONFIGURED", error: "Inquiry storage is not configured. Add DATABASE_URL in Vercel and run npm run prisma:push." });
     try {
       const inquiries = await prisma.inquiry.findMany({ orderBy: { createdAt: "desc" } });
       return json(response, 200, { inquiries });

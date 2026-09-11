@@ -47,9 +47,10 @@ export default function ContactPage() {
 
     fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...cleanForm, message: `${cleanForm.subject}: ${cleanForm.message}` }) })
       .then(async (response) => { if (!response.ok) throw new Error("Unable to send enquiry"); setSubmitted(true); })
-      .catch(() => {
+      .catch((requestError) => {
         saveLocalInquiry(cleanForm);
         setSubmitted(true);
+        console.error("Inquiry API unavailable; saved locally for this browser", requestError);
       });
   };
 

@@ -1,8 +1,9 @@
-import { prisma } from "../_lib/prisma.js";
+import { databaseConfigured, prisma } from "../_lib/prisma.js";
 import { json, requireAdmin, STATUS_VALUES } from "../_lib/http.js";
 
 export default async function handler(request, response) {
   if (!requireAdmin(request, response)) return;
+  if (!databaseConfigured()) return json(response, 503, { code: "DATABASE_NOT_CONFIGURED", error: "Inquiry storage is not configured. Add DATABASE_URL in Vercel and run npm run prisma:push." });
   if (request.method !== "PATCH") {
     response.setHeader("Allow", "PATCH");
     return json(response, 405, { error: "Method not allowed" });

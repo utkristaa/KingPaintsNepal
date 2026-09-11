@@ -77,9 +77,7 @@ export default function App() {
 
   const [darkMode, setDarkMode] = useState(() => {
     try {
-      const saved = localStorage.getItem("kp_theme");
-      if (saved) return saved === "dark";
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+      return localStorage.getItem("kp_theme") === "dark";
     } catch {
       return false;
     }
@@ -94,9 +92,21 @@ export default function App() {
   const toggleDark = () => setDarkMode((prev) => !prev);
 
   const selectedProduct = PRODUCTS.find((p) => p.id === productId);
-  const [title, description] = PAGE_SEO[page] || ["Page Not Found | King Paints Nepal", "The page you requested could not be found on the King Paints Nepal website."];
+  const [title, description] = page === "product-detail" && selectedProduct
+    ? [`${selectedProduct.name} | King Paints Nepal`, `${selectedProduct.description} Explore specifications and enquire with King Paints Nepal in Kathmandu.`]
+    : PAGE_SEO[page] || ["Page Not Found | King Paints Nepal", "The page you requested could not be found on the King Paints Nepal website."];
   const schema = page === "product-detail" && selectedProduct
-    ? { "@context": "https://schema.org", "@type": "Product", name: selectedProduct.name, description: selectedProduct.description, image: selectedProduct.image, brand: { "@type": "Brand", name: SITE.name } }
+    ? {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      name: selectedProduct.name,
+      description: selectedProduct.description,
+      image: selectedProduct.image,
+      category: selectedProduct.category,
+      brand: { "@type": "Brand", name: SITE.name },
+      manufacturer: { "@type": "Organization", name: SITE.legalName, address: SITE.factory.full },
+      url: `${SITE.website}/products/${selectedProduct.id}`,
+    }
     : { "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE.website };
 
   return (

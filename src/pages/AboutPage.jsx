@@ -9,6 +9,7 @@ import { MACHINERY_CATEGORIES } from "../data/machinery.js";
 import Button from "../components/Button.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import SafeImage from "../components/SafeImage.jsx";
+import { formatNepalPhone, getPhoneHref } from "../data/site.js";
 
 const EASE_EXPO = [0.16, 1, 0.3, 1];
 
@@ -163,15 +164,15 @@ export default function AboutPage({ go }) {
                   {/* Portrait & Core Credentials */}
                   <div className="v-executive-profile">
                     <div className="v-executive-avatar-wrap">
-                      <img
+                      <SafeImage
                         src={founder.img}
                         alt={founder.name}
                         className="v-executive-avatar-img"
                         style={{
                           objectPosition: i === 0 ? "center 5%" : "center 12%",
                         }}
-                        loading="lazy"
-                        decoding="async"
+                        width={160}
+                        height={160}
                       />
                       <div className="v-executive-avatar-badge" title="Active Plant Leadership">
                         <Check size={12} strokeWidth={3} />
@@ -196,12 +197,12 @@ export default function AboutPage({ go }) {
                   {/* Clean Direct Contact Actions */}
                   <div className="v-executive-actions">
                     <a
-                      href={`tel:+977${founder.phone}`}
+                      href={getPhoneHref(founder.phone)}
                       className="v-exec-action-call"
                       aria-label={`Call ${founder.name}`}
                     >
                       <Phone size={14} />
-                      <span>+977 {founder.phone.replace(/(\d{3})(\d{3})(\d{4})/, "$1 $2 $3")}</span>
+                      <span>{formatNepalPhone(founder.phone)}</span>
                     </a>
                     <a
                       href={`https://wa.me/977${founder.phone}?text=Hello%20${encodeURIComponent(founder.name)},%20I%20am%20contacting%20you%20from%20the%20King%20Paints%20website.`}
@@ -514,7 +515,7 @@ export default function AboutPage({ go }) {
           <div>
             <h2>Have questions about our facility or bulk supply?</h2>
             <p>
-              Call Founders Krishna Bahadur Adhikari (<strong>9851182340</strong>) or Ujjwal Adhikari (<strong>9851033919</strong>) for factory-direct inquiries.
+              Call Founders Krishna Bahadur Adhikari (<a href={getPhoneHref(FOUNDERS[0].phone)}><strong>{formatNepalPhone(FOUNDERS[0].phone)}</strong></a>) or Ujjwal Adhikari (<a href={getPhoneHref(FOUNDERS[1].phone)}><strong>{formatNepalPhone(FOUNDERS[1].phone)}</strong></a>) for factory-direct inquiries.
             </p>
           </div>
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>

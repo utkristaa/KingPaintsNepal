@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, Sun, Moon, MessageCircle } from "lucide-react";
 import { NAV_ITEMS } from "../data/nav.js";
-import { SITE, getWhatsAppLink } from "../data/site.js";
+import { SITE, formatNepalPhone, getPhoneHref, getWhatsAppLink } from "../data/site.js";
 import Button from "./Button.jsx";
 
 const EASE_EXPO = [0.16, 1, 0.3, 1];
@@ -67,10 +67,10 @@ export default function Navbar({ page, go, menuOpen, setMenuOpen, darkMode, togg
             </div>
 
             <div className="v-nav-right">
-              <div className="v-nav-phone">
+              <a className="v-nav-phone" href={getPhoneHref(SITE.phones[0])}>
                 <Phone size={16} />
-                {SITE.phones[0]}
-              </div>
+                {formatNepalPhone(SITE.phones[0])}
+              </a>
 
               <button
                 type="button"
@@ -155,14 +155,14 @@ export default function Navbar({ page, go, menuOpen, setMenuOpen, darkMode, togg
             </nav>
 
             <div className="v-mobile-menu-footer">
-              <a href={`tel:${SITE.phones[0].replace(/\s+/g, '')}`} className="v-mobile-phone-link">
+              <a href={getPhoneHref(SITE.phones[0])} className="v-mobile-phone-link">
                 <Phone size={17} />
-                <span>{SITE.phones[0]}</span>
+                <span>{formatNepalPhone(SITE.phones[0])}</span>
               </a>
               <a
                 href={getWhatsAppLink()}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="v-mobile-wa-link"
               >
                 <MessageCircle size={18} />

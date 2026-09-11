@@ -3,19 +3,24 @@ import { Search } from "lucide-react";
 import { DEALERS } from "../data/dealers.js";
 import DealerCard from "../components/DealerCard.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
+import GoogleMap from "../components/GoogleMap.jsx";
 
 export default function DealerPage() {
   const [query, setQuery] = useState("");
+  const [activeDealerId, setActiveDealerId] = useState(DEALERS[0]?.id || null);
 
   const filtered = useMemo(() => {
     if (query.trim() === "") return DEALERS;
     return DEALERS.filter(
       (d) =>
         d.location.toLowerCase().includes(query.toLowerCase()) ||
+        d.district.toLowerCase().includes(query.toLowerCase()) ||
         d.name.toLowerCase().includes(query.toLowerCase()) ||
         d.address.toLowerCase().includes(query.toLowerCase())
     );
   }, [query]);
+
+  const selectDealer = (id) => setActiveDealerId(id);
 
   return (
     <div className="v-shell">
@@ -32,6 +37,7 @@ export default function DealerPage() {
           <Search size={16} color="var(--charcoal-soft)" />
           <input
             type="text"
+            aria-label="Search dealers by city, name, or area"
             placeholder="Search by city, dealer name, or area"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -40,15 +46,24 @@ export default function DealerPage() {
         <WhatsAppButton size="sm" message="Hello King Paints Nepal, could you help me find a dealer near me?" />
       </div>
 
-      {filtered.length > 0 ? (
-        <div className="v-dealer-grid">
-          {filtered.map((d) => (
-            <DealerCard key={d.id} dealer={d} />
-          ))}
+      <div className="v-locator-layout">
+        <div className="v-locator-list" aria-label="Dealer results">
+          {filtered.length > 0 ? filtered.map((dealer) => (
+            <button
+              type="button"
+              key={dealer.id}
+              className={`v-locator-item ${activeDealerId === dealer.id ? "active" : ""}`}
+              onClick={() => selectDealer(dealer.id)}
+              aria-pressed={activeDealerId === dealer.id}
+            >
+              <DealerCard dealer={dealer} />
+            </button>
+          )) : (
+            <div className="v-empty-state">No dealer listings match that search. Please contact us for local availability.</div>
+          )}
         </div>
-      ) : (
-        <div className="v-empty-state">No dealer listings match that search. Please contact us for local availability.</div>
-      )}
+        <GoogleMap locations={filtered} activeLocationId={activeDealerId} onMarkerSelect={selectDealer} />
+      </div>
     </div>
   );
 }

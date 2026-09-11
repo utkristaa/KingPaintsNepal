@@ -16,6 +16,7 @@ export default function Button({ variant = "primary", size = "md", children, ico
         href={href}
         target={target}
         rel={rel}
+        aria-label={typeof children === "string" ? children : undefined}
         className={className}
         whileHover={{ scale: 1.025, y: -1 }}
         whileTap={{ scale: 0.97 }}
@@ -32,6 +33,7 @@ export default function Button({ variant = "primary", size = "md", children, ico
       type={type}
       onClick={onClick}
       className={className}
+      aria-label={typeof children === "string" ? children : undefined}
       whileHover={{ scale: 1.025, y: -1 }}
       whileTap={{ scale: 0.97 }}
       transition={springTransition}

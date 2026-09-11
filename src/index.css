@@ -25,6 +25,13 @@ html, body { margin: 0; padding: 0; }
   --radius-lg: 22px;
   --radius-md: 14px;
   --radius-sm: 8px;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --text-body: 16px;
+  --text-body-line: 1.65;
+  --heading-h1: 46px;
+  --heading-h2: 34px;
+  --heading-h3: 21px;
 
   /* Boutique Kinetic Easing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -45,7 +52,9 @@ html, body { margin: 0; padding: 0; }
 }
 
 .varna-root {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--text-body-line);
   background: var(--ivory);
   color: var(--charcoal);
   -webkit-font-smoothing: antialiased;
@@ -66,24 +75,29 @@ html, body { margin: 0; padding: 0; }
 }
 
 .varna-root h1, .varna-root h2, .varna-root h3, .varna-root h4 {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: var(--font-display);
   color: var(--forest-dark);
   margin: 0;
   font-weight: 480;
   letter-spacing: -0.01em;
   line-height: 1.08;
 }
+.varna-root h1 { font-size: var(--heading-h1); }
+.varna-root h2 { font-size: var(--heading-h2); }
+.varna-root h3 { font-size: var(--heading-h3); }
 
-.varna-root p { margin: 0; }
+.varna-root p { margin: 0; font-size: var(--text-body); line-height: var(--text-body-line); }
 .varna-root a { text-decoration: none; color: inherit; }
 .varna-root button { font-family: inherit; cursor: pointer; }
 .varna-root ul { margin: 0; padding: 0; list-style: none; }
 
 .v-breadcrumbs { display: flex; gap: 10px; align-items: center; padding: 22px 0 0; color: var(--charcoal-soft); font-size: 13px; }
 .v-breadcrumbs a { color: inherit; }
-.v-shell { max-width: 1240px; margin: 0 auto; padding: 0 32px; position: relative; }
+.v-shell { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; }
 
-img { max-width: 100%; }
+img { max-width: 100%; height: auto; }
+picture { display: block; max-width: 100%; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width: 720px) {
   .v-shell { padding: 0 20px; }
@@ -105,6 +119,7 @@ img { max-width: 100%; }
   position: relative;
   overflow: hidden;
   will-change: transform;
+  min-height: 48px;
 }
 .v-btn::after {
   content: "";
@@ -159,8 +174,8 @@ img { max-width: 100%; }
 
 /* ---------- Theme Toggle Button ---------- */
 .v-theme-toggle {
-  width: 38px;
-  height: 38px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: inline-flex;
   align-items: center;
@@ -200,7 +215,7 @@ img { max-width: 100%; }
 .v-nav-link.active::after { content: ''; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px; background: var(--gold); border-radius: 2px; }
 .v-nav-right { display: flex; align-items: center; gap: 24px; }
 .v-nav-phone { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--forest-dark); }
-.v-nav-burger { display: none; background: none; border: none; color: var(--forest-dark); }
+.v-nav-burger { display: none; background: none; border: none; color: var(--forest-dark); min-width: 48px; min-height: 48px; align-items: center; justify-content: center; }
 
 @media (max-width: 980px) {
   .v-nav-links, .v-nav-phone { display: none; }
@@ -603,8 +618,10 @@ img { max-width: 100%; }
 .v-footer-link { display: block; font-size: 14px; color: #DCE2D8; padding: 6px 0; transition: color 0.2s ease; }
 .v-footer-link:hover { color: var(--gold); }
 .v-footer-contact-row { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #DCE2D8; margin-bottom: 12px; line-height: 1.5; }
+.v-footer-contact-row a { color: inherit; text-decoration: none; }
+.v-footer-contact-row a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 .v-footer-social { display: flex; gap: 12px; margin-top: 18px; }
-.v-social-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--ivory-soft); transition: all 0.2s ease; }
+.v-social-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; color: var(--ivory-soft); transition: all 0.2s ease; }
 .v-social-btn:hover { background: var(--gold); border-color: var(--gold); }
 .v-footer-bottom { display: flex; justify-content: space-between; padding-top: 24px; font-size: 13px; color: #8FA089; flex-wrap: wrap; gap: 12px; }
 .v-footer-legal { display: flex; flex-wrap: wrap; gap: 18px; padding-top: 18px; font-size: 13px; color: #DCE2D8; }
@@ -666,6 +683,7 @@ img { max-width: 100%; }
 .v-detail-title { font-size: 38px; margin-bottom: 16px; }
 .v-detail-desc { font-size: 16px; color: var(--charcoal-soft); line-height: 1.7; margin-bottom: 28px; }
 .v-spec-table { display: flex; flex-direction: column; border-top: 1px solid var(--border); margin-bottom: 28px; }
+.v-spec-table, .v-spec-row { min-width: 0; }
 .v-spec-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 14.5px; gap: 16px; }
 .v-spec-key { color: var(--charcoal-soft); flex-shrink: 0; }
 .v-spec-val { color: var(--forest-dark); font-weight: 500; text-align: right; }
@@ -695,6 +713,27 @@ img { max-width: 100%; }
 .v-dealer-name { font-family: 'Fraunces', serif; font-size: 20px; color: var(--forest-dark); }
 .v-dealer-row { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--charcoal-soft); line-height: 1.5; }
 .v-dealer-row svg { flex-shrink: 0; margin-top: 1px; color: var(--sage); }
+.v-dealer-row a { color: inherit; text-decoration: none; }
+.v-dealer-row a:hover { color: var(--forest-dark); text-decoration: underline; text-underline-offset: 3px; }
+.v-locator-layout { display: grid; grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.6fr); gap: 24px; padding: 24px 0 80px; align-items: stretch; }
+.v-locator-list { display: flex; flex-direction: column; gap: 12px; min-width: 0; max-height: 620px; overflow-y: auto; padding-right: 4px; }
+.v-locator-item { display: block; width: 100%; padding: 0; text-align: left; border: 0; background: transparent; cursor: pointer; border-radius: var(--radius-md); }
+.v-locator-item .v-dealer-card { transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease; }
+.v-locator-item:hover .v-dealer-card, .v-locator-item.active .v-dealer-card { border-color: var(--gold); box-shadow: 0 8px 22px rgba(30, 58, 44, 0.1); transform: translateY(-2px); }
+.v-google-map { width: 100%; min-height: 520px; height: 100%; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; background: #e8eee9; box-shadow: 0 12px 32px rgba(30, 58, 44, 0.08); }
+.v-google-map iframe { display: block; width: 100%; height: 100%; min-height: 520px; border: 0; }
+.v-google-map-fallback { position: relative; }
+.v-map-open-link { position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; min-height: 48px; padding: 10px 16px; border-radius: 999px; background: var(--forest); color: var(--white); font-size: 13px; font-weight: 600; box-shadow: 0 5px 16px rgba(0, 0, 0, 0.18); }
+.v-map-info-window { display: grid; gap: 5px; min-width: 190px; padding: 4px 2px; color: #262420; font: 13px/1.4 Inter, sans-serif; }
+.v-map-info-window strong { font-size: 14px; }
+.v-map-info-window a { color: #1e3a2c; font-weight: 600; }
+.v-contact-map-section { max-width: 1200px; padding: 0 0 80px; }
+.v-contact-map-section h2 { margin-bottom: 8px; font-size: 32px; }
+.v-contact-map-section p { color: var(--charcoal-soft); }
+.v-contact-map-section .v-google-map { margin-top: 24px; min-height: 420px; height: 420px; }
+.v-contact-map-section .v-google-map iframe { min-height: 420px; }
+@media (max-width: 900px) { .v-locator-layout { grid-template-columns: 1fr; } .v-locator-list { max-height: none; } .v-google-map { min-height: 420px; } .v-google-map iframe { min-height: 420px; } }
+@media (max-width: 600px) { .v-contact-map-section { padding-bottom: 56px; } .v-contact-map-section h2 { font-size: 27px; } .v-contact-map-section .v-google-map, .v-contact-map-section .v-google-map iframe { min-height: 320px; height: 320px; } }
 
 /* ---------- About page ---------- */
 .v-about-hero { padding: 64px 0 40px; text-align: left; max-width: 720px; }
@@ -1100,14 +1139,14 @@ img { max-width: 100%; }
 /* ---------- WhatsApp floating button (High contrast, never disappears on scroll) ---------- */
 .v-whatsapp-float {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 999;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
 }
 .v-whatsapp-float .v-btn {
-  background: #FFFFFF !important;
-  color: var(--forest-dark) !important;
-  border: 1.5px solid rgba(20, 40, 33, 0.16) !important;
+  background: #25D366 !important;
+  color: #073b1d !important;
+  border: 1.5px solid #1ebc59 !important;
   box-shadow: 0 10px 30px -4px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.08) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -1116,26 +1155,26 @@ img { max-width: 100%; }
   font-weight: 600;
 }
 .v-whatsapp-float .v-btn:hover {
-  background: var(--forest) !important;
-  color: #FFFFFF !important;
-  border-color: var(--forest) !important;
+  background: #1ebe5d !important;
+  color: #062d17 !important;
+  border-color: #169c48 !important;
   box-shadow: 0 14px 36px -4px rgba(20, 40, 33, 0.4) !important;
 }
 .v-whatsapp-float .v-btn svg {
-  color: #25D366;
+  color: #073b1d;
   width: 18px;
   height: 18px;
   flex-shrink: 0;
   transition: transform 0.3s var(--ease-spring);
 }
 .v-whatsapp-float .v-btn:hover svg {
-  color: #FFFFFF;
+  color: #062d17;
   transform: scale(1.15);
 }
 @media (max-width: 720px) {
   .v-whatsapp-float {
-    bottom: 20px;
-    right: 20px;
+    bottom: 25px;
+    right: 25px;
   }
   .v-whatsapp-float .v-btn {
     padding: 0 !important;
@@ -1160,8 +1199,8 @@ img { max-width: 100%; }
   .v-nav .v-logo { font-size: 22px; }
   .v-nav-right { gap: 8px; }
   .v-nav-right .v-btn { padding: 9px 12px; font-size: 12px; }
-  .v-nav-burger { padding: 8px; }
-  .v-theme-toggle { width: 34px; height: 34px; }
+  .v-nav-burger { padding: 0; }
+  .v-theme-toggle { width: 48px; height: 48px; }
   .v-hero { padding: 42px 0 32px; }
   .v-hero h1 { font-size: clamp(34px, 11vw, 42px); line-height: 1.04; }
   .v-hero-sub { font-size: 16px; }
@@ -1201,6 +1240,11 @@ img { max-width: 100%; }
   .v-legal-section h2 { font-size: 20px; }
   .v-footer { padding-top: 48px; }
   .v-footer-legal { gap: 10px 16px; font-size: 12px; }
+}
+
+@media (max-width: 600px) {
+  .v-spec-row { gap: 12px; }
+  .v-spec-key, .v-spec-val { overflow-wrap: anywhere; }
 }
 
 @media (max-width: 480px) {

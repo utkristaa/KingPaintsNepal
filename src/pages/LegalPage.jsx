@@ -1,6 +1,10 @@
 import React from "react";
 import Seo from "../components/Seo.jsx";
-import { SITE } from "../data/site.js";
+import { SITE, formatNepalPhone } from "../data/site.js";
+
+function ContactPhones() {
+  return <>{SITE.phones.map((phone, index) => <React.Fragment key={phone}>{index > 0 && " / "}<a href={`tel:+977${phone.replace(/\D/g, "")}`}>{formatNepalPhone(phone)}</a></React.Fragment>)}</>;
+}
 
 const CONTENT = {
   privacy: {
@@ -13,7 +17,7 @@ const CONTENT = {
       ["How we use information", "We use enquiry details to respond to questions, discuss products or projects, and provide requested business information. We do not use this form to build an advertising profile."],
       ["Sharing and storage", "This version of the website does not send form data to a server. It only displays a local confirmation in your browser. If a form delivery service or customer-management system is added later, this policy must be updated before personal data is sent to that provider."],
       ["Your choices", "You may choose not to submit the form. You can ask what information we hold about you or ask us to correct or delete information by contacting us by phone or WhatsApp."],
-      ["Contact", `${SITE.name} operates from ${SITE.factory.full}. Contact: ${SITE.phones.join(" / ")} or WhatsApp.`],
+      ["Contact", <>{SITE.name} operates from {SITE.factory.full}. Contact: <ContactPhones /> or WhatsApp.</>],
     ],
   },
   terms: {
@@ -38,7 +42,7 @@ const CONTENT = {
       ["Essential operation", "The site is a client-rendered website. It may use browser memory while a page is open for navigation and form display, but it does not intentionally set a persistent tracking cookie."],
       ["Third parties", "The site links to WhatsApp and currently loads fonts and image assets from third-party services. Following an external link or loading a third-party asset may be subject to that provider's own privacy and cookie practices."],
       ["Consent", "Because there are currently no non-essential analytics or advertising cookies, this implementation does not show a cookie-consent banner. If tracking, analytics, embedded content, or marketing cookies are added, they should be blocked until an appropriate consent choice is recorded and this policy is updated."],
-      ["Questions", `For questions about this policy, contact ${SITE.name} at ${SITE.phones.join(" / ")} or through WhatsApp.`],
+      ["Questions", <>For questions about this policy, contact {SITE.name} at <ContactPhones /> or through WhatsApp.</>],
     ],
   },
   refund: {

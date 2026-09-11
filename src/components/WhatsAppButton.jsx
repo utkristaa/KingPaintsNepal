@@ -9,7 +9,7 @@ export default function WhatsAppButton({ variant = "outline", size = "md", messa
       as="a"
       href={getWhatsAppLink(message)}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       variant={variant}
       size={size}
       icon={MessageCircle}

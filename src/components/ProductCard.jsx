@@ -71,7 +71,7 @@ export default function ProductCard({ product, onView }) {
         <div className="v-card-title">{product.name}</div>
         <p className="v-card-desc">{product.shortDesc}</p>
         <div className="v-card-foot">
-          <button className="v-card-link" onClick={() => onView(product.id)}>
+          <button type="button" className="v-card-link" onClick={() => onView(product.id)} aria-label={`View details for ${product.name}`}>
             View Details <ChevronRight size={15} />
           </button>
         </div>

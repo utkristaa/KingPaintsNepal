@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { SITE } from "../data/site.js";
+import { SITE, getPhoneHref } from "../data/site.js";
 
 const DEFAULT_IMAGE = `${SITE.website}/og-image.svg`;
 
@@ -37,6 +37,8 @@ export default function Seo({ title, description, path = "/", image = DEFAULT_IM
     setMeta('meta[name="twitter:description"]', "content", description);
     setMeta('meta[name="twitter:image"]', "name", "twitter:image");
     setMeta('meta[name="twitter:image"]', "content", image);
+    setMeta('meta[name="twitter:url"]', "name", "twitter:url");
+    setMeta('meta[name="twitter:url"]', "content", canonical);
 
     let link = document.head.querySelector('link[rel="canonical"]');
     if (!link) {
@@ -45,7 +47,7 @@ export default function Seo({ title, description, path = "/", image = DEFAULT_IM
       document.head.appendChild(link);
     }
     link.href = canonical;
-  }, [canonical, description, image, title]);
+  }, [canonical, description, image, title, type]);
 
   return null;
 }
@@ -71,7 +73,9 @@ export function LocalBusinessSchema() {
         "@type": "LocalBusiness",
         name: SITE.name,
         url: SITE.website,
-        telephone: `+977-${SITE.phones[0].replaceAll("-", "")}`,
+        telephone: getPhoneHref(SITE.phones[0]).replace("tel:", ""),
+        image: DEFAULT_IMAGE,
+        priceRange: "$$",
         address: {
           "@type": "PostalAddress",
           streetAddress: SITE.factory.line1,
@@ -79,6 +83,7 @@ export function LocalBusinessSchema() {
           addressCountry: "NP",
         },
         areaServed: "Nepal",
+        knowsAbout: ["Paint manufacturing", "Decorative paint", "Construction coatings"],
       }}
     />
   );

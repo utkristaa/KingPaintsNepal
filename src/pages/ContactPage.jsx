@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { MapPin, Phone, Mail, CheckCircle2 } from "lucide-react";
-import { SITE, ENQUIRY_SUBJECTS } from "../data/site.js";
+import { SITE, ENQUIRY_SUBJECTS, formatNepalPhone, getPhoneHref } from "../data/site.js";
 import Button from "../components/Button.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import SafeImage from "../components/SafeImage.jsx";
+import GoogleMap from "../components/GoogleMap.jsx";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", phone: "", subject: ENQUIRY_SUBJECTS[0], message: "", consent: false });
@@ -63,14 +64,14 @@ export default function ContactPage() {
             <div className="v-info-icon"><Phone size={19} /></div>
             <div>
               <div className="v-info-title">Phone</div>
-              <div className="v-info-val">{SITE.phones[0]}<br />{SITE.phones[1]}</div>
+              <div className="v-info-val"><a href={getPhoneHref(SITE.phones[0])}>{formatNepalPhone(SITE.phones[0])}</a><br /><a href={getPhoneHref(SITE.phones[1])}>{formatNepalPhone(SITE.phones[1])}</a></div>
             </div>
           </div>
           {SITE.email && <div className="v-info-row">
             <div className="v-info-icon"><Mail size={19} /></div>
             <div>
               <div className="v-info-title">Email</div>
-              <div className="v-info-val">{SITE.email}</div>
+              <div className="v-info-val"><a href={`mailto:${SITE.email}`}>{SITE.email}</a></div>
             </div>
           </div>}
           <div style={{ marginTop: 4 }}>
@@ -118,6 +119,17 @@ export default function ContactPage() {
           </form>
         </div>
       </div>
+
+      <section className="v-contact-map-section" aria-labelledby="factory-map-title">
+        <div className="v-section-head-row">
+          <div>
+            <div className="v-eyebrow">Visit our factory</div>
+            <h2 id="factory-map-title">King Paints Nepal Pvt. Ltd.</h2>
+            <p>Bohorataar, Tarkeshwor, Kathmandu, Nepal</p>
+          </div>
+        </div>
+        <GoogleMap className="v-factory-map" embed />
+      </section>
     </div>
   );
 }

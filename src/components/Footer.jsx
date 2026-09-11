@@ -1,7 +1,7 @@
 import React from "react";
 import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 import { NAV_ITEMS, CATEGORIES } from "../data/nav.js";
-import { SITE } from "../data/site.js";
+import { SITE, formatNepalPhone, getPhoneHref } from "../data/site.js";
 import WhatsAppButton from "./WhatsAppButton.jsx";
 
 export default function Footer({ go }) {
@@ -18,9 +18,9 @@ export default function Footer({ go }) {
               <WhatsAppButton size="sm" />
             </div>
             {Object.values(SITE.social).some(Boolean) && <div className="v-footer-social">
-              {SITE.social.facebook && <a className="v-social-btn" href={SITE.social.facebook} aria-label="Facebook"><Facebook size={16} /></a>}
-              {SITE.social.instagram && <a className="v-social-btn" href={SITE.social.instagram} aria-label="Instagram"><Instagram size={16} /></a>}
-              {SITE.social.linkedin && <a className="v-social-btn" href={SITE.social.linkedin} aria-label="LinkedIn"><Linkedin size={16} /></a>}
+              {SITE.social.facebook && <a className="v-social-btn" href={SITE.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook size={16} /></a>}
+              {SITE.social.instagram && <a className="v-social-btn" href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram size={16} /></a>}
+              {SITE.social.linkedin && <a className="v-social-btn" href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={16} /></a>}
             </div>}
           </div>
           <div>
@@ -38,8 +38,8 @@ export default function Footer({ go }) {
           <div>
             <div className="v-footer-col-title">Contact</div>
             <div className="v-footer-contact-row"><MapPin size={16} />{SITE.factory.full}</div>
-            <div className="v-footer-contact-row"><Phone size={16} />{SITE.phones.join(" / ")}</div>
-            {SITE.email && <div className="v-footer-contact-row"><Mail size={16} />{SITE.email}</div>}
+            <div className="v-footer-contact-row"><Phone size={16} /><span>{SITE.phones.map((phone) => <a key={phone} href={getPhoneHref(phone)}>{formatNepalPhone(phone)}</a>).reduce((items, item, index) => index === 0 ? [item] : [...items, " / ", item], [])}</span></div>
+            {SITE.email && <div className="v-footer-contact-row"><Mail size={16} /><a href={`mailto:${SITE.email}`}>{SITE.email}</a></div>}
           </div>
         </div>
         <div className="v-footer-bottom">

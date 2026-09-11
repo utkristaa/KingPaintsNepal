@@ -32,9 +32,11 @@ export default function ColourLibraryPage() {
         <div className="v-filter-row" style={{ padding: 0 }}>
           {COLOUR_FAMILIES.map((f) => (
             <button
+              type="button"
               key={f}
               className={`v-filter-chip ${family === f ? "active" : ""}`}
               onClick={() => setFamily(f)}
+              aria-pressed={family === f}
             >
               {f}
             </button>
@@ -44,6 +46,7 @@ export default function ColourLibraryPage() {
           <Search size={16} color="var(--charcoal-soft)" />
           <input
             type="text"
+            aria-label="Search colours by name or code"
             placeholder="Search by name or code"
             value={query}
             onChange={(e) => setQuery(e.target.value)}

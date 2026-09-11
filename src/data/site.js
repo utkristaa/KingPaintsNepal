@@ -18,7 +18,7 @@ export const SITE = {
   phones: ["985-1182340", "9851033919"],
 
   email: "info@kingpaintsnepal.com.np",
-  website: "https://kingpaintsnepal.com",
+  website: "https://kingpaintsnepal.com.np",
   factoryMapUrl: "https://maps.google.com/?cid=7605525506212840303",
   factoryPlaceId: "ChIJX1st5BMZ6zkRb0P97yZBjGk",
 

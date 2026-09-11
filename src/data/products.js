@@ -10,13 +10,16 @@ function buildProducts() {
       name: `${category} ${num}`,
       category,
       shortDesc: `${category} for Nepal's homes, projects, and commercial spaces.`,
-      image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=500&q=70",
+      image: "/paint-product.webp",
       description: `A King Paints Nepal ${category.toLowerCase()} range for dependable coverage and a consistent finish. Contact our team for product specifications and availability.`,
       features: ["Consistent finish", "Made in Kathmandu", "Project support"],
       use: `Interior and exterior ${category.toLowerCase()} applications`,
-      sizes: "Ask our team",
-      finish: category,
-      coverage: "Project dependent",
+      packSizes: ["1L", "4L", "10L", "20L"],
+      finish: i % 3 === 0 ? "Semi-Gloss" : (i % 2 === 0 ? "Gloss" : "Matte"),
+      coverageArea: "100-120 sq ft/liter",
+      dryingTime: "Touch dry in 2-4 hours",
+      tdsUrl: "/documents/king-paints-tds.pdf",
+      sdsUrl: "/documents/king-paints-sds.pdf",
     });
   }
   return products;

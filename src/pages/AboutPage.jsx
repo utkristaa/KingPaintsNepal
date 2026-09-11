@@ -10,6 +10,7 @@ import Button from "../components/Button.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
 import SafeImage from "../components/SafeImage.jsx";
 import { formatNepalPhone, getPhoneHref } from "../data/site.js";
+import DealerApplicationForm from "../components/DealerApplicationForm.jsx";
 
 const EASE_EXPO = [0.16, 1, 0.3, 1];
 
@@ -428,7 +429,7 @@ export default function AboutPage({ go }) {
           <div className="v-split">
             <motion.div className="v-split-img" {...fadeUp(0)}>
               <SafeImage
-                src="https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=900&q=75"
+                src="/factory-formulation.webp"
                 alt="Paint formulation facility in Kathmandu"
               />
             </motion.div>
@@ -504,6 +505,15 @@ export default function AboutPage({ go }) {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="v-shell v-about-dealer-section" aria-labelledby="about-dealer-title">
+        <div className="v-section-head">
+          <div className="v-section-label">Grow with King Paints</div>
+          <h2 id="about-dealer-title">Become a Dealer / Partner</h2>
+          <p>Join our growing network of hardware stores, contractors, and paint specialists across Nepal.</p>
+        </div>
+        <DealerApplicationForm />
       </section>
 
       {/* CTA Band */}

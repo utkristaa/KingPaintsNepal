@@ -33,9 +33,15 @@ export default function ProductDetailPage({ product, go, viewProduct }) {
 
           <div className="v-spec-table">
             <div className="v-spec-row"><span className="v-spec-key">Recommended Use</span><span className="v-spec-val">{product.use}</span></div>
-            <div className="v-spec-row"><span className="v-spec-key">Available Sizes</span><span className="v-spec-val">{product.sizes}</span></div>
-            <div className="v-spec-row"><span className="v-spec-key">Finish / Type</span><span className="v-spec-val">{product.finish}</span></div>
-            <div className="v-spec-row"><span className="v-spec-key">Coverage</span><span className="v-spec-val">{product.coverage}</span></div>
+            <div className="v-spec-row"><span className="v-spec-key">Pack Sizes</span><span className="v-spec-val">{product.packSizes.join(", ")}</span></div>
+            <div className="v-spec-row"><span className="v-spec-key">Finish</span><span className="v-spec-val">{product.finish}</span></div>
+            <div className="v-spec-row"><span className="v-spec-key">Coverage Area</span><span className="v-spec-val">{product.coverageArea}</span></div>
+            <div className="v-spec-row"><span className="v-spec-key">Drying Time</span><span className="v-spec-val">{product.dryingTime}</span></div>
+          </div>
+
+          <div className="v-product-docs" aria-label="Product documents">
+            <a className="v-product-doc-link" href={product.tdsUrl} download>Download TDS <span>PDF</span></a>
+            <a className="v-product-doc-link" href={product.sdsUrl} download>Download SDS <span>PDF</span></a>
           </div>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>

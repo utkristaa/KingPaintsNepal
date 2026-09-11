@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kingpaintsnepal.com/sitemap.xml
+Sitemap: https://kingpaintsnepal.com.np/sitemap.xml

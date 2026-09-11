@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import SafeImage from "./SafeImage.jsx";
@@ -14,6 +14,7 @@ const CATEGORY_STYLES = {
 };
 
 export default function ProductCard({ product, onView }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const catStyle = CATEGORY_STYLES[product.category] || {
     color: "var(--forest-dark)",
     bg: "var(--forest-tint)",
@@ -43,8 +44,9 @@ export default function ProductCard({ product, onView }) {
         }}
       />
 
-      <div className="v-card-img">
-        <SafeImage src={product.image} alt={product.name} loading="lazy" />
+      <div className={`v-card-img ${imageLoaded ? "is-loaded" : ""}`}>
+        {!imageLoaded && <div className="v-image-skeleton" aria-hidden="true" />}
+        <SafeImage src={product.image} alt={product.name} loading="lazy" onLoad={() => setImageLoaded(true)} />
       </div>
 
       <div className="v-card-body">

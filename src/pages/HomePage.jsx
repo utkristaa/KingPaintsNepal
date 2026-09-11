@@ -144,7 +144,7 @@ export default function HomePage({ go, viewProduct }) {
                 y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
               }}
             >
-              <SafeImage src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=75" alt="A freshly painted building exterior" />
+              <SafeImage src="/painted-building.webp" alt="A freshly painted building exterior" />
             </motion.div>
 
             {/* Bottom left floating manufacturing facility */}
@@ -162,7 +162,7 @@ export default function HomePage({ go, viewProduct }) {
                 y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
               }}
             >
-              <SafeImage src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&w=800&q=75" alt="Inside a paint manufacturing facility" />
+              <SafeImage src="/paint-factory.webp" alt="Inside a King Paints Nepal manufacturing facility" />
             </motion.div>
 
             {/* Glassmorphic floating metadata tag */}
@@ -197,29 +197,20 @@ export default function HomePage({ go, viewProduct }) {
           viewport={{ once: true, margin: "-40px" }}
         >
           {[
-            { num: "100% In-House", label: "Tarakeshwar plant synthesis", accent: "var(--terracotta)" },
-            { num: "0% Lead", label: "Zero heavy metals, family-safe", accent: "var(--ochre)" },
-            { num: "≥ 98.5%", label: "Lab-verified two-coat opacity", accent: "var(--slate-blue)" },
-            { num: "1L – 20L", label: "Consumer & contractor buckets", accent: "var(--moss)" },
-          ].map((s) => (
-            <motion.div
-              key={s.num}
-              variants={statItemVariants}
-              className="v-stat-card"
-              style={{
-                "--card-accent": s.accent,
-              }}
-              whileHover={{ y: -4 }}
-            >
-              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: s.accent }} />
-              <div style={{ fontFamily: "'Fraunces', serif", fontSize: "clamp(22px, 2.2vw, 30px)", color: s.accent, fontWeight: 700, marginBottom: 4, whiteSpace: "nowrap" }}>
-                {s.num}
-              </div>
-              <div className="v-stat-card-label" style={{ fontSize: 13, fontWeight: 500, lineHeight: 1.45 }}>
-                {s.label}
-              </div>
-            </motion.div>
-          ))}
+            { num: "100% In-House", label: "Tarakeshwar plant synthesis", icon: Factory },
+            { num: "0% Lead", label: "Zero heavy metals, family-safe", icon: ShieldCheck },
+            { num: "≥ 98.5%", label: "Lab-verified two-coat opacity", icon: Flame },
+            { num: "1L – 20L", label: "Consumer & contractor buckets", icon: Boxes },
+          ].map((s) => {
+            const Icon = s.icon;
+            return (
+              <motion.div key={s.num} variants={statItemVariants} className="v-stat-card" whileHover={{ y: -4 }}>
+                <div className="v-stat-icon" aria-hidden="true"><Icon size={20} strokeWidth={2} /></div>
+                <div className="v-stat-card-number">{s.num}</div>
+                <div className="v-stat-card-label">{s.label}</div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </section>
 
@@ -264,25 +255,21 @@ export default function HomePage({ go, viewProduct }) {
                 icon: Factory,
                 title: "In-House Resin Synthesis",
                 desc: "Our Kathmandu facility supports local formulation and polymer production for residential, commercial, and project enquiries.",
-                accent: "var(--terracotta)",
               },
               {
                 icon: Flame,
                 title: "Thermal Cross-Linking",
                 desc: "We engineer paint solutions according to surface temperature, moisture exposure, and durability requirements.",
-                accent: "var(--ochre)",
               },
               {
                 icon: ShieldCheck,
                 title: "Climate-Specific Formulation",
                 desc: "Formulated specifically for Nepal's harsh UV index, monsoon dampness, and masonry characteristics.",
-                accent: "var(--slate-blue)",
               },
               {
                 icon: Boxes,
                 title: "Manufactured, Not Resold",
                 desc: "King Paints Nepal manufactures directly at our Tarakeshwar plant with full chemical quality control.",
-                accent: "var(--moss)",
               },
             ].map((f) => {
               const Icon = f.icon;
@@ -291,22 +278,17 @@ export default function HomePage({ go, viewProduct }) {
                   key={f.title}
                   variants={featureItemVariants}
                   className="v-feature-card"
-                  style={{
-                    "--card-accent": f.accent,
-                  }}
                   whileHover={{ y: -5 }}
                 >
-                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 4, background: f.accent }} />
                   <motion.div
                     className="v-feature-icon"
-                    style={{ background: f.accent, color: "#FFFFFF", marginBottom: 18 }}
                     whileHover={{ scale: 1.1, rotate: 2 }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
                     <Icon size={22} />
                   </motion.div>
-                  <h3 className="v-feature-title" style={{ fontSize: 19, marginBottom: 8 }}>{f.title}</h3>
-                  <p className="v-feature-desc" style={{ fontSize: 14, lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
+                  <h3 className="v-feature-title">{f.title}</h3>
+                  <p className="v-feature-desc">{f.desc}</p>
                 </motion.div>
               );
             })}

@@ -5,10 +5,12 @@ import Button from "../components/Button.jsx";
 import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import SafeImage from "../components/SafeImage.jsx";
 import GoogleMap from "../components/GoogleMap.jsx";
+import DealerApplicationForm from "../components/DealerApplicationForm.jsx";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", phone: "", subject: ENQUIRY_SUBJECTS[0], message: "", consent: false });
   const [submitted, setSubmitted] = useState(false);
+  const [activeTab, setActiveTab] = useState("contact");
 
   const sanitizeInput = (str) => {
     if (typeof str !== "string") return "";
@@ -51,7 +53,12 @@ export default function ContactPage() {
         <p>Product enquiries, dealer and distributor enquiries, bulk orders, project requirements, or general questions — send us a message and our team will get back to you.</p>
       </div>
 
-      <div className="v-contact-grid">
+      <div className="v-contact-tabs" role="tablist" aria-label="Contact options">
+        <button type="button" role="tab" aria-selected={activeTab === "contact"} className={activeTab === "contact" ? "active" : ""} onClick={() => setActiveTab("contact")}>General Contact</button>
+        <button type="button" role="tab" aria-selected={activeTab === "dealer"} className={activeTab === "dealer" ? "active" : ""} onClick={() => setActiveTab("dealer")}>Become a Dealer / Partner</button>
+      </div>
+
+      {activeTab === "contact" ? <div className="v-contact-grid">
         <div className="v-contact-info-card">
           <div className="v-info-row">
             <div className="v-info-icon"><MapPin size={19} /></div>
@@ -78,7 +85,7 @@ export default function ContactPage() {
             <WhatsAppButton />
           </div>
           <div className="v-map-strip">
-            <SafeImage src="https://images.unsplash.com/photo-1523419409543-a5e549c1faa8?auto=format&fit=crop&w=900&q=80" alt="Manufacturing facility building" />
+            <SafeImage src="/factory-location.webp" alt="King Paints Nepal factory in Tarkeshwor, Kathmandu" />
           </div>
         </div>
 
@@ -118,7 +125,14 @@ export default function ContactPage() {
             <Button variant="primary" type="submit">Send Message</Button>
           </form>
         </div>
-      </div>
+      </div> : <section className="v-dealer-application-panel" aria-labelledby="dealer-application-title">
+        <div className="v-section-head">
+          <div className="v-section-label">Partnerships across Nepal</div>
+          <h2 id="dealer-application-title">Become a Dealer / Partner</h2>
+          <p>Tell us about your business and our partnerships team will help you plan the right King Paints range for your market.</p>
+        </div>
+        <DealerApplicationForm />
+      </section>}
 
       <section className="v-contact-map-section" aria-labelledby="factory-map-title">
         <div className="v-section-head-row">

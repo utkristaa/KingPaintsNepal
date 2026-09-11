@@ -101,7 +101,7 @@ export default function App() {
       "@type": "Product",
       name: selectedProduct.name,
       description: selectedProduct.description,
-      image: selectedProduct.image,
+      image: `${SITE.website}${selectedProduct.image}`,
       category: selectedProduct.category,
       brand: { "@type": "Brand", name: SITE.name },
       manufacturer: { "@type": "Organization", name: SITE.legalName, address: SITE.factory.full },

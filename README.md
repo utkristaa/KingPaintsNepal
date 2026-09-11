@@ -1,180 +1,175 @@
-# King Paints Nepal — Official Website
+# King Paints Nepal
 
-<p align="center">
-  <img src="public/og-image.svg" alt="King Paints Nepal" width="120" />
-</p>
+Official website and inquiry management system for King Paints Nepal, a paint manufacturer and distributor based in Tarakeshwar, Kathmandu.
 
-<p align="center">
-  <strong>A React + Vite website for King Paints Nepal</strong><br/>
-  Premium paint manufacturer based in Tarakeshwar Municipality, Ward 5, Kathmandu, Nepal.
-</p>
+The project is a React and Vite frontend with Vercel serverless functions, Prisma ORM, and PostgreSQL-backed inquiry storage.
 
-<p align="center">
-  <a href="https://reactjs.org"><img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white" alt="React 18" /></a>
-  <a href="https://vitejs.dev"><img src="https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white" alt="Vite 5" /></a>
-  <a href="https://www.framer.com/motion"><img src="https://img.shields.io/badge/Framer_Motion-11-EE4B96?logo=framer&logoColor=white" alt="Framer Motion" /></a>
-</p>
+## Highlights
 
----
+- Responsive product catalogue with detail pages, specifications, and TDS/SDS downloads
+- 1,080-shade colour library with search, filters, pagination, and quick-view previews
+- Dealer locator with search, map markers, and factory location embed
+- Contact and dealer partnership inquiry forms
+- WhatsApp, phone, and email contact actions
+- Dynamic SEO metadata, Open Graph tags, canonical URLs, sitemap, robots rules, and JSON-LD schemas
+- Admin inquiry dashboard at `/admin/inquiries`
+- Prisma `Inquiry` model with Vercel API handlers for create, list, and status updates
 
-## ✨ Features
+## Technology
 
-- **Animated hero** with staggered kinetic typography and parallax collage
-- **Full-site dark mode** — persistent via `localStorage`, respects `prefers-color-scheme`
-- **Responsive mobile navigation** — full-screen drawer with smooth Framer Motion transitions
-- **Leadership section** with founder profiles and contact links
-- **Colour library** with live search and filter
-- **Contact form** with client-side validation and sanitisation
-- **WhatsApp integration** — floating button and in-app links, number centralised in `site.js`
-- **SEO ready** — per-page `<title>`, meta descriptions, structured data (LocalBusiness + Product schemas), sitemap, `robots.txt`, and OpenGraph image
-- **Legal pages** — Privacy Policy, Terms & Conditions, Cookie Policy, Refund Policy
+- React 18 and Vite 5
+- Framer Motion and Lucide React
+- Prisma 6 and PostgreSQL
+- Vercel Functions
 
----
+## Local Development
 
-## 🚀 Getting Started
+### Requirements
 
-### Prerequisites
+- Node.js 18 or newer
+- npm 9 or newer
+- PostgreSQL for shared inquiry storage
 
-- [Node.js](https://nodejs.org/) v18 or later
-- npm v9 or later
-
-### Install & Run
+### Install and run
 
 ```bash
-# Install dependencies
 npm install
-
-# Start local dev server (usually http://localhost:5173)
 npm run dev
 ```
 
-### Production Build
+The Vite site runs at `http://localhost:5173` or the next available port.
+
+The regular Vite server serves the frontend only. It does not execute the `api/` serverless functions. For full local API testing, use:
+
+```bash
+npx vercel dev
+```
+
+### Production build
 
 ```bash
 npm run build
-# Output goes to dist/
+npm run preview
 ```
 
----
+## Environment Variables
 
-## 📁 Project Structure
+Copy `.env.example` to `.env.local` for local work:
 
-```
-king-paints-nepal-website/
-├── public/
-│   ├── favicon.png          # Site favicon
-│   ├── founder-krishna.jpg  # Founder photo — Krishna Bahadur Adhikari
-│   ├── founder-ujjwal.jpg   # Founder photo — Ujjwal Adhikari
-│   ├── og-image.svg         # OpenGraph / social share image
-│   ├── paint-placeholder.svg
-│   ├── robots.txt
-│   ├── sitemap.xml
-│   └── _headers             # Netlify security headers
-│
-└── src/
-    ├── main.jsx             # Entry point
-    ├── App.jsx              # Client-side routing (no page reloads)
-    ├── index.css            # Varna design system — tokens, layout, components, dark mode
-    │
-    ├── data/                # ← All editable content lives here
-    │   ├── site.js          # Company name, address, phones, email, social, WhatsApp
-    │   ├── nav.js           # Navigation items and product categories
-    │   ├── products.js      # Product catalogue
-    │   ├── colours.js       # Colour library swatches
-    │   ├── dealers.js       # Find-a-Dealer listings
-    │   ├── testimonials.js  # Homepage testimonials
-    │   ├── certifications.js
-    │   ├── machinery.js     # Factory equipment categories (About page)
-    │   └── timeline.js      # Company history and founder bios
-    │
-    ├── components/          # Reusable UI components
-    │   ├── Navbar.jsx       # Sticky header + full-screen mobile drawer
-    │   ├── Footer.jsx
-    │   ├── Button.jsx
-    │   ├── ProductCard.jsx
-    │   ├── ColourCard.jsx
-    │   ├── DealerCard.jsx
-    │   ├── TestimonialCard.jsx
-    │   ├── SectionHeading.jsx
-    │   ├── SafeImage.jsx
-    │   ├── Breadcrumbs.jsx
-    │   ├── WhatsAppButton.jsx
-    │   └── Seo.jsx          # <title>, <meta>, LocalBusiness schema, StructuredData
-    │
-    └── pages/               # One file per route
-        ├── HomePage.jsx
-        ├── ProductsPage.jsx
-        ├── ProductDetailPage.jsx
-        ├── ColourLibraryPage.jsx
-        ├── DealerPage.jsx
-        ├── AboutPage.jsx    # Leadership, factory process, timeline, machinery
-        ├── ContactPage.jsx
-        ├── LegalPage.jsx    # Privacy / Terms / Cookies / Refunds
-        └── NotFoundPage.jsx
+```env
+DATABASE_URL=postgresql://user:password@host:5432/king_paints
 ```
 
----
+`DATABASE_URL` is required for PostgreSQL inquiry storage. `ADMIN_API_TOKEN` is optional. When it is not configured, the dashboard password is used for the API fallback.
 
-## ✏️ Editing Content
+Never commit `.env.local` or real credentials.
 
-All real-world content is isolated in `src/data/` — you can update the website without touching any component or page code.
+## Database Setup
 
-| File | What it controls |
-|------|-----------------|
-| `src/data/site.js` | Company name, tagline, factory address, phone numbers, email, website URL, social links, WhatsApp number |
-| `src/data/nav.js` | Navigation tabs and product category names |
-| `src/data/products.js` | Product catalogue (name, category, description, specs, features) |
-| `src/data/colours.js` | Colour library swatches, names, and codes |
-| `src/data/dealers.js` | Find-a-Dealer listings |
-| `src/data/testimonials.js` | Homepage testimonial cards |
-| `src/data/certifications.js` | Certifications displayed on the About page |
-| `src/data/machinery.js` | Factory equipment categories on the About page |
-| `src/data/timeline.js` | Company history timeline and founder bios |
-
-### Finding Placeholders
-
-Anything in square brackets — e.g. `[EMAIL TO BE ADDED]`, `[COLOUR NAME]` — is a placeholder for information not yet provided. Run the following to find all remaining ones:
+The Prisma schema is in `prisma/schema.prisma`.
 
 ```bash
-grep -r "\[" src/data/
+npm run prisma:generate
+npm run prisma:push
 ```
 
-### WhatsApp Number
+Run `prisma:push` once against the production database before testing live submissions.
 
-The WhatsApp number is centralised in `src/data/site.js` as `WHATSAPP_NUMBER`. Every WhatsApp link across the site (floating button, header, contact page, product pages) reads from this single value — update it there and it updates everywhere.
+## Inquiry Workflow
 
----
+Public forms submit to `POST /api/inquiries`.
 
-## 🎨 Design System
+The admin dashboard reads from `GET /api/inquiries` and updates statuses through `PATCH /api/inquiries/:id`.
 
-The site uses the **Varna Design System** defined entirely in `src/index.css`.
+Supported statuses are `PENDING`, `REVIEWED`, and `CONTACTED`.
 
-| Token | Light Mode | Dark Mode |
-|-------|-----------|-----------|
-| `--ivory` | `#F6F1E7` | `#111815` |
-| `--forest` | `#1E3A2C` | `#2C5943` |
-| `--gold` | `#AD7C3B` | `#D4A75E` |
-| `--charcoal` | `#262420` | `#EAE5DB` |
+Open the admin page at:
 
-**Typography:** `Fraunces` (serif — headings) + `Inter` (sans — body). Both loaded from Google Fonts in `index.html`.
+```text
+/admin/inquiries
+```
 
----
+The current dashboard password is `utkrista123`. For production, configure a strong `ADMIN_API_TOKEN` in Vercel and change the application password before sharing the dashboard publicly.
 
-## 🔒 Security
+If the API/database is unavailable, the frontend saves submissions in browser storage so local testing can still show them in the admin page. Browser-local inquiries are not shared between devices; PostgreSQL is required for production persistence.
 
-- HTTP security headers configured in `public/_headers` (Content-Security-Policy, X-Frame-Options, etc.)
-- Contact form inputs are sanitised client-side before use
-- No environment variables exposed to the browser
+## Routes
 
----
+### Public pages
 
-## 📞 Contact
+- `/`
+- `/products`
+- `/products/:id`
+- `/colours`
+- `/dealers`
+- `/about`
+- `/contact`
+- `/privacy`
+- `/terms`
+- `/cookies`
+- `/refunds`
 
-**King Paints Nepal**  
-Tarakeshwar Municipality, Ward 5, Kathmandu, Nepal  
-📞 985-1182340 / 9851033919  
-💬 [WhatsApp](https://wa.me/9779851182340)
+### Admin
 
----
+- `/admin/inquiries`
 
-<p align="center">Made with ❤️ in Kathmandu, Nepal</p>
+### API
+
+- `POST /api/inquiries`
+- `GET /api/inquiries`
+- `PATCH /api/inquiries/:id`
+
+## Project Structure
+
+```text
+api/                    Vercel serverless inquiry handlers
+prisma/                 Prisma schema
+public/                 Static SEO, image, document, and favicon assets
+src/components/         Shared UI components
+src/data/               Site, product, colour, dealer, and local inquiry data
+src/pages/               Public and admin page components
+src/App.jsx             Client-side route selection
+src/index.css           Shared design system and responsive styles
+index.html              Static document head and SEO defaults
+vercel.json             SPA fallback configuration
+```
+
+## Content Updates
+
+Most business content is centralized in `src/data/`:
+
+- `site.js` for company details, phones, email, domain, WhatsApp, and map links
+- `products.js` for product records and specifications
+- `colours.js` and `colourGenerator.js` for the colour catalogue
+- `dealers.js` for locator records
+- `nav.js` for navigation and product categories
+
+## Deployment
+
+The GitHub repository is connected to Vercel. Use the Vite framework preset and the default build command:
+
+```bash
+npm run build
+```
+
+Add `DATABASE_URL` to Vercel for Production, Preview, and Development environments. The `postinstall` script runs `prisma generate` automatically during deployment.
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for the deployment checklist.
+
+## Quality Checks
+
+```bash
+npm run prisma:generate
+npm run build
+git diff --check
+```
+
+The production build should pass before pushing changes to `main`.
+
+## Contact
+
+**King Paints Nepal**
+
+Tarakeshwar Municipality, Ward 5, Kathmandu, Nepal
+
+Website: https://kingpaintsnepal.com.np/

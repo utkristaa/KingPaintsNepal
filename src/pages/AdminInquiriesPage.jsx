@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { Download, Eye, EyeOff, LockKeyhole, RefreshCw } from "lucide-react";
+import { getLocalInquiries, updateLocalInquiry } from "../data/localInquiries.js";
 
 const FILTERS = ["ALL", "PENDING", "REVIEWED", "CONTACTED"];
 const ADMIN_PASSWORD = "utkrista123";
@@ -63,7 +64,9 @@ export default function AdminInquiriesPage() {
       if (!response.ok) throw new Error(data.error || "Unable to load inquiries");
       setInquiries(data.inquiries || []);
     } catch (requestError) {
-      setError(requestError.message);
+      const localInquiries = getLocalInquiries();
+      setInquiries(localInquiries);
+      setError(localInquiries.length ? "Showing locally saved inquiries. Connect DATABASE_URL on Vercel for shared storage." : requestError.message);
     } finally {
       setLoading(false);
     }
@@ -76,14 +79,20 @@ export default function AdminInquiriesPage() {
   }), [filter, inquiries, query]);
 
   const updateStatus = async (id, status) => {
-    const response = await fetch(`/api/inquiries/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${ADMIN_PASSWORD}` },
-      body: JSON.stringify({ status }),
-    });
-    const data = await response.json();
-    if (!response.ok) return setError(data.error || "Unable to update status");
-    setInquiries((current) => current.map((item) => item.id === id ? data.inquiry : item));
+    try {
+      const response = await fetch(`/api/inquiries/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${ADMIN_PASSWORD}` },
+        body: JSON.stringify({ status }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Unable to update status");
+      setInquiries((current) => current.map((item) => item.id === id ? data.inquiry : item));
+    } catch (requestError) {
+      const localInquiry = updateLocalInquiry(id, status);
+      if (localInquiry) return setInquiries((current) => current.map((item) => item.id === id ? localInquiry : item));
+      setError(requestError.message);
+    }
   };
 
   const exportCsv = () => {

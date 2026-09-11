@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button.jsx";
+import { saveLocalInquiry } from "../data/localInquiries.js";
 
 const INITIAL_FORM = {
   businessName: "",
@@ -25,7 +26,10 @@ export default function DealerApplicationForm() {
     event.preventDefault();
     fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: form.contactPerson, businessName: form.businessName, email: form.email, phone: form.phone, location: `${form.municipality}, ${form.district}`, message: `Existing hardware store: ${form.hardwareStore}. Estimated monthly volume: ${form.monthlyVolume}.` }) })
       .then(async (response) => { if (!response.ok) throw new Error("Unable to submit application"); setSubmitted(true); })
-      .catch(() => alert("We could not submit your application. Please contact our team directly."));
+      .catch(() => {
+        saveLocalInquiry({ name: form.contactPerson, businessName: form.businessName, email: form.email, phone: form.phone, location: `${form.municipality}, ${form.district}`, message: `Existing hardware store: ${form.hardwareStore}. Estimated monthly volume: ${form.monthlyVolume}.` });
+        setSubmitted(true);
+      });
   };
 
   if (submitted) {

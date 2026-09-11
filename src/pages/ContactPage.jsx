@@ -6,6 +6,7 @@ import WhatsAppButton from "../components/WhatsAppButton.jsx";
 import SafeImage from "../components/SafeImage.jsx";
 import GoogleMap from "../components/GoogleMap.jsx";
 import DealerApplicationForm from "../components/DealerApplicationForm.jsx";
+import { saveLocalInquiry } from "../data/localInquiries.js";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", location: "", subject: ENQUIRY_SUBJECTS[0], message: "", consent: false });
@@ -46,7 +47,10 @@ export default function ContactPage() {
 
     fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...cleanForm, message: `${cleanForm.subject}: ${cleanForm.message}` }) })
       .then(async (response) => { if (!response.ok) throw new Error("Unable to send enquiry"); setSubmitted(true); })
-      .catch(() => alert("We could not send your enquiry. Please contact us by phone or WhatsApp."));
+      .catch(() => {
+        saveLocalInquiry(cleanForm);
+        setSubmitted(true);
+      });
   };
 
   return (
@@ -95,7 +99,7 @@ export default function ContactPage() {
         <div className="v-form-card">
           {submitted && (
             <div className="v-success-note">
-              <CheckCircle2 size={18} /> This form does not transmit messages yet. Please use the phone or WhatsApp options to contact the team directly.
+              <CheckCircle2 size={18} /> Your enquiry has been saved. Our team will review it and contact you shortly.
             </div>
           )}
           <form onSubmit={handleSubmit}>

@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480">
+  <!--
+    King Paints Nepal – Favicon
+    Clean crown + shield design with a transparent background.
+    Faithful to brand: gold crown, red/yellow shield, KING PAINTS.
+  -->
+  <defs>
+    <linearGradient id="goldGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%"   stop-color="#FFE84D"/>
+      <stop offset="45%"  stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#C9A800"/>
+    </linearGradient>
+    <linearGradient id="shieldYellow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#FFFDE0"/>
+      <stop offset="100%" stop-color="#FFE566"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="3" dy="4" stdDeviation="5" flood-color="#00000044"/>
+    </filter>
+  </defs>
+
+  <!-- ═══════════════════════════════════════
+       SHIELD (drawn first so crown overlaps)
+  ══════════════════════════════════════════ -->
+  <!-- Shield outer red shape -->
+  <path d="M 58,218 L 58,360 Q 58,440 200,470 Q 342,440 342,360 L 342,218 Z"
+        fill="#E60000" filter="url(#shadow)"/>
+
+  <!-- Shield inner yellow field -->
+  <path d="M 76,226 L 76,354 Q 76,426 200,454 Q 324,426 324,354 L 324,226 Z"
+        fill="url(#shieldYellow)"/>
+
+  <!-- Red pearl bar at top of shield interior -->
+  <rect x="76" y="226" width="248" height="44" rx="4" fill="#CC0000"/>
+  <!-- Pearl dots -->
+  <circle cx="100" cy="248" r="10" fill="white" opacity="0.9"/>
+  <circle cx="124" cy="248" r="10" fill="white" opacity="0.9"/>
+  <circle cx="148" cy="248" r="10" fill="white" opacity="0.9"/>
+  <circle cx="172" cy="248" r="10" fill="white" opacity="0.9"/>
+  <circle cx="196" cy="248" r="10" fill="white" opacity="0.9"/>
+  <circle cx="220" cy="248" r="10" fill="white" opacity="0.9"/>
+  <circle cx="244" cy="248" r="10" fill="white" opacity="0.9"/>
+  <circle cx="268" cy="248" r="10" fill="white" opacity="0.9"/>
+  <circle cx="292" cy="248" r="10" fill="white" opacity="0.9"/>
+
+  <!-- KING text -->
+  <text x="200" y="330"
+        font-family="'Arial Black','Impact',sans-serif"
+        font-size="86" font-weight="900"
+        fill="#7A0000"
+        text-anchor="middle" dominant-baseline="auto">KING</text>
+
+  <!-- PAINTS text -->
+  <text x="200" y="400"
+        font-family="'Arial Black','Impact',sans-serif"
+        font-size="60" font-weight="900"
+        fill="#7A0000"
+        text-anchor="middle" dominant-baseline="auto">PAINTS</text>
+
+  <!-- ═══════════════════════════════════════
+       CROWN (drawn on top, overlaps shield)
+  ══════════════════════════════════════════ -->
+  <!-- Crown shadow layer -->
+  <g opacity="0.22" transform="translate(5,7)">
+    <path d="
+      M 62,235 C 20,225 -5,190 8,148 C 18,115 50,100 80,110
+      C 68,78 72,45 88,22 C 100,5 118,2 130,12
+      C 145,28 150,60 150,88
+      C 162,65 176,44 195,30 C 210,18 228,16 240,28
+      C 252,40 256,64 254,90
+      C 262,66 270,44 284,30 C 296,18 314,18 325,30
+      C 345,50 348,72 342,88
+      C 346,60 350,28 366,12 C 378,2 396,5 408,22
+      C 424,45 428,78 416,110
+      C 446,100 478,115 488,148
+      C 501,190 476,225 434,235
+      Z"
+      fill="black"/>
+  </g>
+
+  <!-- Crown main body -->
+  <path d="
+    M 58,230 C 16,220 -8,185 6,143 C 16,110 48,95 78,106
+    C 66,73 70,40 86,18 C 98,1 116,-2 128,9
+    C 143,25 148,57 148,84
+    C 160,61 174,40 193,26 C 208,14 226,12 238,25
+    C 250,38 254,62 252,88
+    C 260,64 268,40 282,26 C 294,14 312,14 323,26
+    C 343,46 346,68 340,84
+    C 344,57 348,25 363,9 C 375,-2 393,1 405,18
+    C 421,40 425,73 413,106
+    C 443,95 475,110 485,143
+    C 499,185 475,220 433,230
+    Z"
+    fill="url(#goldGrad)" stroke="#1a1000" stroke-width="5.5"
+    stroke-linejoin="round" filter="url(#shadow)"/>
+
+  <!-- Crown decorative highlights (lighter gold on top) -->
+  <path d="
+    M 140,80 C 148,55 158,35 175,22 C 188,12 202,10 210,20
+    C 218,10 232,12 245,22 C 262,35 272,55 280,80
+    C 270,60 262,40 256,38 C 252,36 252,50 248,70
+    C 244,50 242,36 238,38 C 232,40 224,60 214,80
+    C 210,60 206,40 202,38 C 198,36 196,60 190,80
+    Z"
+    fill="rgba(255,255,200,0.35)" stroke="none"/>
+
+  <!-- Mini crown at top center -->
+  <!-- Base bar of mini crown -->
+  <rect x="166" y="64" width="68" height="14" rx="4"
+        fill="url(#goldGrad)" stroke="#1a1000" stroke-width="3.5"/>
+  <!-- Mini crown points -->
+  <path d="M172,64 L168,38 L182,56 L200,28 L218,56 L232,38 L228,64 Z"
+        fill="url(#goldGrad)" stroke="#1a1000" stroke-width="3.5"
+        stroke-linejoin="round"/>
+  <!-- Mini crown top balls -->
+  <circle cx="168" cy="37" r="7" fill="url(#goldGrad)" stroke="#1a1000" stroke-width="3"/>
+  <circle cx="200" cy="26" r="8" fill="url(#goldGrad)" stroke="#1a1000" stroke-width="3"/>
+  <circle cx="232" cy="37" r="7" fill="url(#goldGrad)" stroke="#1a1000" stroke-width="3"/>
+</svg>

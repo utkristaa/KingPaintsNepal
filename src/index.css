@@ -973,7 +973,7 @@ img { max-width: 100%; }
   margin-bottom: 8px;
 }
 
-.v-executive-name {
+.varna-root .v-executive-name {
   font-family: 'Fraunces', serif;
   font-size: 23px;
   color: #FAF6EF;

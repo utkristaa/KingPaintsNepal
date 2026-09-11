@@ -8,7 +8,7 @@ import GoogleMap from "../components/GoogleMap.jsx";
 import DealerApplicationForm from "../components/DealerApplicationForm.jsx";
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", phone: "", subject: ENQUIRY_SUBJECTS[0], message: "", consent: false });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", location: "", subject: ENQUIRY_SUBJECTS[0], message: "", consent: false });
   const [submitted, setSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState("contact");
 
@@ -36,14 +36,17 @@ export default function ContactPage() {
 
     const cleanForm = {
       name: sanitizeInput(form.name),
+      email: sanitizeInput(form.email),
       phone: sanitizeInput(form.phone),
       subject: sanitizeInput(form.subject),
+      location: sanitizeInput(form.location),
       message: sanitizeInput(form.message),
       consent: form.consent,
     };
 
-    console.log("Sanitized submission package:", cleanForm);
-    setSubmitted(true);
+    fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...cleanForm, message: `${cleanForm.subject}: ${cleanForm.message}` }) })
+      .then(async (response) => { if (!response.ok) throw new Error("Unable to send enquiry"); setSubmitted(true); })
+      .catch(() => alert("We could not send your enquiry. Please contact us by phone or WhatsApp."));
   };
 
   return (
@@ -104,6 +107,14 @@ export default function ContactPage() {
               <div className="v-field">
                 <label htmlFor="phone">Phone</label>
                 <input id="phone" inputMode="tel" value={form.phone} onChange={handleChange("phone")} placeholder="98XXXXXXXX" />
+              </div>
+              <div className="v-field">
+                <label htmlFor="email">Email</label>
+                <input id="email" type="email" required value={form.email} onChange={handleChange("email")} placeholder="you@example.com" />
+              </div>
+              <div className="v-field">
+                <label htmlFor="location">Location</label>
+                <input id="location" required value={form.location} onChange={handleChange("location")} placeholder="District or municipality" />
               </div>
             </div>
             <div className="v-field" style={{ marginBottom: 18 }}>

@@ -13,6 +13,14 @@ const CATEGORY_STYLES = {
   "Construction Coatings": { color: "#5C5346", bg: "#F2EFEA", border: "#DDD7CE" },
 };
 
+const CATEGORY_IMAGES = {
+  "Interior Paints": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop",
+  "Exterior Paints": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop",
+  Primers: "https://images.unsplash.com/photo-1562259922-835639697964?q=80&w=800&auto=format&fit=crop",
+  Waterproofing: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop",
+  "Construction Coatings": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop",
+};
+
 export default function ProductCard({ product, onView }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const catStyle = CATEGORY_STYLES[product.category] || {
@@ -46,7 +54,7 @@ export default function ProductCard({ product, onView }) {
 
       <div className={`v-card-img ${imageLoaded ? "is-loaded" : ""}`}>
         {!imageLoaded && <div className="v-image-skeleton" aria-hidden="true" />}
-        <SafeImage src={product.image} alt={product.name} loading="lazy" onLoad={() => setImageLoaded(true)} />
+        <SafeImage src={CATEGORY_IMAGES[product.category] || product.image} alt={`${product.category} paint application`} loading="lazy" onLoad={() => setImageLoaded(true)} />
       </div>
 
       <div className="v-card-body">

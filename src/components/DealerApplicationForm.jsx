@@ -4,6 +4,8 @@ import Button from "./Button.jsx";
 const INITIAL_FORM = {
   businessName: "",
   contactPerson: "",
+  email: "",
+  phone: "",
   district: "",
   municipality: "",
   hardwareStore: "",
@@ -21,7 +23,9 @@ export default function DealerApplicationForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setSubmitted(true);
+    fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: form.contactPerson, businessName: form.businessName, email: form.email, phone: form.phone, location: `${form.municipality}, ${form.district}`, message: `Existing hardware store: ${form.hardwareStore}. Estimated monthly volume: ${form.monthlyVolume}.` }) })
+      .then(async (response) => { if (!response.ok) throw new Error("Unable to submit application"); setSubmitted(true); })
+      .catch(() => alert("We could not submit your application. Please contact our team directly."));
   };
 
   if (submitted) {
@@ -37,6 +41,8 @@ export default function DealerApplicationForm() {
       {step === 1 && <div className="v-dealer-form-grid">
         <div className="v-field"><label htmlFor="dealer-business-name">Business Name</label><input id="dealer-business-name" required value={form.businessName} onChange={updateField("businessName")} /></div>
         <div className="v-field"><label htmlFor="dealer-contact-person">Contact Person</label><input id="dealer-contact-person" required value={form.contactPerson} onChange={updateField("contactPerson")} /></div>
+        <div className="v-field"><label htmlFor="dealer-email">Email</label><input id="dealer-email" type="email" required value={form.email} onChange={updateField("email")} /></div>
+        <div className="v-field"><label htmlFor="dealer-phone">Phone</label><input id="dealer-phone" inputMode="tel" required value={form.phone} onChange={updateField("phone")} placeholder="+977 98X-XXXXXXX" /></div>
       </div>}
 
       {step === 2 && <div className="v-dealer-form-grid">

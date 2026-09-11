@@ -144,7 +144,7 @@ export default function HomePage({ go, viewProduct }) {
                 y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
               }}
             >
-              <SafeImage src="/painted-building.webp" alt="A freshly painted building exterior" />
+              <SafeImage src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=1200&auto=format&fit=crop" alt="Modern painted living room interior" />
             </motion.div>
 
             {/* Bottom left floating manufacturing facility */}
@@ -162,7 +162,7 @@ export default function HomePage({ go, viewProduct }) {
                 y: { duration: 7, repeat: Infinity, ease: "easeInOut" },
               }}
             >
-              <SafeImage src="/paint-factory.webp" alt="Inside a King Paints Nepal manufacturing facility" />
+              <SafeImage src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=800&auto=format&fit=crop" alt="Professional wall painting in progress" />
             </motion.div>
 
             {/* Glassmorphic floating metadata tag */}

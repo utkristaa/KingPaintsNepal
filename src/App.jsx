@@ -16,8 +16,9 @@ import Seo, { LocalBusinessSchema, StructuredData } from "./components/Seo.jsx";
 import { SITE } from "./data/site.js";
 import Breadcrumbs from "./components/Breadcrumbs.jsx";
 import LegalPage from "./pages/LegalPage.jsx";
+import AdminInquiriesPage from "./pages/AdminInquiriesPage.jsx";
 
-const ROUTES = { home: "/", products: "/products", colours: "/colours", dealers: "/dealers", about: "/about", contact: "/contact", privacy: "/privacy", terms: "/terms", cookies: "/cookies", refunds: "/refunds" };
+const ROUTES = { home: "/", products: "/products", colours: "/colours", dealers: "/dealers", about: "/about", contact: "/contact", privacy: "/privacy", terms: "/terms", cookies: "/cookies", refunds: "/refunds", admin: "/admin/inquiries" };
 
 function getRoute() {
   const path = window.location.pathname.replace(/\/$/, "") || "/";
@@ -108,6 +109,10 @@ export default function App() {
       url: `${SITE.website}/products/${selectedProduct.id}`,
     }
     : { "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE.website };
+
+  if (page === "admin") {
+    return <div className={`varna-root ${darkMode ? "dark" : ""}`}><AdminInquiriesPage /></div>;
+  }
 
   return (
     <div className={`varna-root ${darkMode ? "dark" : ""}`}>

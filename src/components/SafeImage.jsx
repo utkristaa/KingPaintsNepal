@@ -1,6 +1,6 @@
 import React from "react";
 
-const FALLBACK_IMAGE = "/paint-placeholder.svg";
+const FALLBACK_IMAGE = "/paint-product.webp";
 
 export default function SafeImage({ src, alt, ...props }) {
   const handleError = (event) => {

@@ -8,8 +8,10 @@ import GoogleMap from "../components/GoogleMap.jsx";
 import DealerApplicationForm from "../components/DealerApplicationForm.jsx";
 import { saveLocalInquiry } from "../data/localInquiries.js";
 
+const INITIAL_FORM = { name: "", email: "", phone: "", location: "", subject: ENQUIRY_SUBJECTS[0], message: "", consent: false };
+
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", location: "", subject: ENQUIRY_SUBJECTS[0], message: "", consent: false });
+  const [form, setForm] = useState(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState("contact");
 
@@ -45,11 +47,16 @@ export default function ContactPage() {
       consent: form.consent,
     };
 
+    const completeSubmission = () => {
+      setForm(INITIAL_FORM);
+      setSubmitted(true);
+    };
+
     fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...cleanForm, message: `${cleanForm.subject}: ${cleanForm.message}` }) })
-      .then(async (response) => { if (!response.ok) throw new Error("Unable to send enquiry"); setSubmitted(true); })
+      .then(async (response) => { if (!response.ok) throw new Error("Unable to send enquiry"); completeSubmission(); })
       .catch((requestError) => {
         saveLocalInquiry(cleanForm);
-        setSubmitted(true);
+        completeSubmission();
         console.error("Inquiry API unavailable; saved locally for this browser", requestError);
       });
   };
@@ -98,12 +105,12 @@ export default function ContactPage() {
         </div>
 
         <div className="v-form-card">
-          {submitted && (
-            <div className="v-success-note">
-              <CheckCircle2 size={18} /> Your enquiry has been saved. Our team will review it and contact you shortly.
-            </div>
-          )}
-          <form onSubmit={handleSubmit}>
+          {submitted ? <div className="v-submission-success" role="status" aria-live="polite">
+            <div className="v-submission-success-icon"><CheckCircle2 size={28} /></div>
+            <h2>Enquiry sent successfully</h2>
+            <p>Your details have been saved. Our team will review your enquiry and contact you shortly.</p>
+            <button type="button" className="v-submission-again" onClick={() => setSubmitted(false)}>Send another enquiry</button>
+          </div> : <form onSubmit={handleSubmit}>
             <div className="v-form-grid">
               <div className="v-field">
                 <label htmlFor="name">Name</label>
@@ -139,7 +146,7 @@ export default function ContactPage() {
               <span>I have read the <a href="/privacy">Privacy Policy</a> and agree that King Paints Nepal may use these details to respond to my enquiry.</span>
             </label>
             <Button variant="primary" type="submit">Send Message</Button>
-          </form>
+          </form>}
         </div>
       </div> : <section className="v-dealer-application-panel" aria-labelledby="dealer-application-title">
         <div className="v-section-head">

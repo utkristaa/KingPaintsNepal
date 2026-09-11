@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CheckCircle2 } from "lucide-react";
 import Button from "./Button.jsx";
 import { saveLocalInquiry } from "../data/localInquiries.js";
 
@@ -24,16 +25,21 @@ export default function DealerApplicationForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const completeSubmission = () => {
+      setForm(INITIAL_FORM);
+      setStep(1);
+      setSubmitted(true);
+    };
     fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: form.contactPerson, businessName: form.businessName, email: form.email, phone: form.phone, location: `${form.municipality}, ${form.district}`, message: `Existing hardware store: ${form.hardwareStore}. Estimated monthly volume: ${form.monthlyVolume}.` }) })
-      .then(async (response) => { if (!response.ok) throw new Error("Unable to submit application"); setSubmitted(true); })
+      .then(async (response) => { if (!response.ok) throw new Error("Unable to submit application"); completeSubmission(); })
       .catch(() => {
         saveLocalInquiry({ name: form.contactPerson, businessName: form.businessName, email: form.email, phone: form.phone, location: `${form.municipality}, ${form.district}`, message: `Existing hardware store: ${form.hardwareStore}. Estimated monthly volume: ${form.monthlyVolume}.` });
-        setSubmitted(true);
+        completeSubmission();
       });
   };
 
   if (submitted) {
-    return <div className="v-dealer-success" role="status">Thank you. Our partnerships team will review your details and contact you shortly.</div>;
+    return <div className="v-dealer-success" role="status" aria-live="polite"><div className="v-submission-success-icon"><CheckCircle2 size={28} /></div><h2>Partnership enquiry sent</h2><p>Thank you. Our team will review your details and contact you shortly.</p><button type="button" className="v-submission-again" onClick={() => setSubmitted(false)}>Start another application</button></div>;
   }
 
   return (
